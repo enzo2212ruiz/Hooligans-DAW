@@ -1,90 +1,90 @@
--- BORRAR TABLAS 
-DROP TABLE ASISTE CASCADE CONSTRAINTS;
-DROP TABLE CITA CASCADE CONSTRAINTS;
-DROP TABLE TRAJE CASCADE CONSTRAINTS;
-DROP TABLE CLIENTE_COLOR CASCADE CONSTRAINTS;
-DROP TABLE TALLER CASCADE CONSTRAINTS;
-DROP TABLE EMPLEADO CASCADE CONSTRAINTS;
-DROP TABLE CLIENTE CASCADE CONSTRAINTS;
+DROP TABLE IF EXISTS ASISTE;
+DROP TABLE IF EXISTS CITA;
+DROP TABLE IF EXISTS TRAJE;
+DROP TABLE IF EXISTS CLIENTE_COLOR;
+DROP TABLE IF EXISTS TALLER;
+DROP TABLE IF EXISTS EMPLEADO;
+DROP TABLE IF EXISTS CLIENTE;
 
 -- TABLA CLIENTE
 CREATE TABLE CLIENTE (
-    ID_cliente NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    nombre VARCHAR2(100),
-    superpoder VARCHAR2(100)
+    ID_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    superpoder VARCHAR(100)
 );
 
--- TABLA CLIENTE_COLOR
+-- Tabla para los colores
 CREATE TABLE CLIENTE_COLOR (
-    ID_cliente NUMBER,
-    color VARCHAR2(50),
-    PRIMARY KEY (ID_cliente, color),
+    ID_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    color VARCHAR(50),
     FOREIGN KEY (ID_cliente) REFERENCES CLIENTE(ID_cliente)
+        ON DELETE CASCADE
 );
 
 -- TABLA EMPLEADO
 CREATE TABLE EMPLEADO (
-    ID_empleado NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    nom_ape VARCHAR2(100),
-    apodo VARCHAR2(50),
-    categoria VARCHAR2(50)
+    ID_empleado INT AUTO_INCREMENT PRIMARY KEY,
+    nom_ape VARCHAR(100),
+    apodo VARCHAR(50),
+    categoria VARCHAR(50)
 );
 
 -- TABLA TALLER
 CREATE TABLE TALLER (
-    ID_taller NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    nombre VARCHAR2(100),
-    tipo VARCHAR2(50)
+    ID_taller INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    tipo VARCHAR(50)
 );
 
 -- TABLA TRAJE
 CREATE TABLE TRAJE (
-    ID_traje NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    nombre VARCHAR2(100),
-    estado VARCHAR2(50),
-    ID_cliente NUMBER,
+    ID_traje INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    estado VARCHAR(50),
+    ID_cliente INT,
     FOREIGN KEY (ID_cliente) REFERENCES CLIENTE(ID_cliente)
+        ON DELETE CASCADE
 );
 
--- TABLA CITA
+-- TABLA CITA (corregida)
 CREATE TABLE CITA (
-    ID_cita NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    ID_cita INT AUTO_INCREMENT PRIMARY KEY,
     dia DATE,
-    hora VARCHAR2(10),
-    duracion NUMBER,
-    ID_taller NUMBER,
-    ID_responsable NUMBER,
-    ID_traje NUMBER,
-    FOREIGN KEY (ID_taller) REFERENCES TALLER(ID_taller),
-    FOREIGN KEY (ID_responsable) REFERENCES EMPLEADO(ID_empleado),
+    hora TIME,
+    duracion INT,
+    ID_taller INT,
+    ID_responsable INT,
+    ID_traje INT,
+    FOREIGN KEY (ID_taller) REFERENCES TALLER(ID_taller)
+        ON DELETE CASCADE,
+    FOREIGN KEY (ID_responsable) REFERENCES EMPLEADO(ID_empleado)
+        ON DELETE CASCADE,
     FOREIGN KEY (ID_traje) REFERENCES TRAJE(ID_traje)
+        ON DELETE CASCADE
 );
 
--- TABLA ASISTE
+-- TABLA ASISTE	
 CREATE TABLE ASISTE (
-    ID_cita NUMBER,
-    ID_asistente NUMBER,
+    ID_cita INT AUTO_INCREMENT,
+    ID_asistente INT,
     PRIMARY KEY (ID_cita, ID_asistente),
-    FOREIGN KEY (ID_cita) REFERENCES CITA(ID_cita),
+    FOREIGN KEY (ID_cita) REFERENCES CITA(ID_cita)
+        ON DELETE CASCADE,
     FOREIGN KEY (ID_asistente) REFERENCES EMPLEADO(ID_empleado)
+        ON DELETE CASCADE
 );
 
-
----INSERTAMOS LOS DATOS---
+-- INSERTAMOS LOS DATOS --
 
 -- CLIENTE
 INSERT INTO CLIENTE (nombre, superpoder) VALUES
 ('cliente1', 'poder1');
-
 INSERT INTO CLIENTE (nombre, superpoder) VALUES
 ('cliente2', 'poder2');
-
 INSERT INTO CLIENTE (nombre, superpoder) VALUES
 ('cliente3', 'poder3');
-
 INSERT INTO CLIENTE (nombre, superpoder) VALUES
 ('cliente4', 'poder4');
-
 INSERT INTO CLIENTE (nombre, superpoder) VALUES
 ('cliente5', 'poder5');
 
@@ -100,16 +100,12 @@ INSERT INTO CLIENTE_COLOR VALUES (5, 'blanco');
 -- EMPLEADO
 INSERT INTO EMPLEADO (nom_ape, apodo, categoria) VALUES
 ('Victor Perez', 'victor', 'categoria1');
-
 INSERT INTO EMPLEADO (nom_ape, apodo, categoria) VALUES
 ('Roberto Lopez', 'rober', 'categoria2');
-
 INSERT INTO EMPLEADO (nom_ape, apodo, categoria) VALUES
 ('Diego Martin', 'diego', 'categoria3');
-
 INSERT INTO EMPLEADO (nom_ape, apodo, categoria) VALUES
 ('Guillermo Ruiz', 'guille', 'categoria4');
-
 INSERT INTO EMPLEADO (nom_ape, apodo, categoria) VALUES
 ('Pablo Gomez', 'pablo', 'categoria5');
 
@@ -132,19 +128,15 @@ INSERT INTO TRAJE (nombre, estado, ID_cliente) VALUES ('traje5', 'usado', 5);
 
 -- CITA
 INSERT INTO CITA (dia, hora, duracion, ID_taller, ID_responsable, ID_traje) VALUES
-(TO_DATE('2026-04-01','YYYY-MM-DD'), '10:00', 60, 1, 1, 1);
-
+('2026-04-01', '10:00', 60, 1, 1, 1);
 INSERT INTO CITA (dia, hora, duracion, ID_taller, ID_responsable, ID_traje) VALUES
-(TO_DATE('2026-04-02','YYYY-MM-DD'), '11:00', 60, 2, 2, 2);
-
+('2026-04-02', '11:00', 60, 2, 2, 2);
 INSERT INTO CITA (dia, hora, duracion, ID_taller, ID_responsable, ID_traje) VALUES
-(TO_DATE('2026-04-03','YYYY-MM-DD'), '12:00', 60, 3, 3, 3);
-
+('2026-04-03', '12:00', 60, 3, 3, 3);
 INSERT INTO CITA (dia, hora, duracion, ID_taller, ID_responsable, ID_traje) VALUES
-(TO_DATE('2026-04-04','YYYY-MM-DD'), '13:00', 60, 4, 4, 4);
-
+('2026-04-04', '13:00', 60, 4, 4, 4);
 INSERT INTO CITA (dia, hora, duracion, ID_taller, ID_responsable, ID_traje) VALUES
-(TO_DATE('2026-04-05','YYYY-MM-DD'), '14:00', 60, 5, 5, 5);
+('2026-04-05', '14:00', 60, 5, 5, 5);
 
 
 -- ASISTE
@@ -153,9 +145,3 @@ INSERT INTO ASISTE VALUES (2, 3);
 INSERT INTO ASISTE VALUES (3, 4);
 INSERT INTO ASISTE VALUES (4, 5);
 INSERT INTO ASISTE VALUES (5, 1);
-
-
----Hemos tenido un error a la hora de crear la base de datos
----Se trataba de que con el autoincrement al ejecutar nos daba un error y no sabiamos como solucionarlo
----La unica solucion que hemos encontrado es sustituirlo por GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
----Que a corto plazo nos sirve pero lo arreglaremos para el proximo sprint
