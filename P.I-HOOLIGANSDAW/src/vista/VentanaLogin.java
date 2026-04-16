@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import vista.VentanaMenu;
+
+import controlador.Usuario;
 
 public class VentanaLogin extends JFrame {
     
@@ -42,23 +45,34 @@ public class VentanaLogin extends JFrame {
     
     private void configButtons() {
         btnLogin.setBounds(24, 164, 89, 23);
-        
+
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 String usuario = textUsuario.getText();
                 String password = textPassword.getText();
-                
-                System.out.println(usuario);
-                System.out.println(password);
-                
+
+                // SIMULAMOS EL ROL
+                String rol = "";
+
+                if (usuario.equals("maestro")) {
+                    rol = "MAESTRO";
+                } else if (usuario.equals("oficial")) {
+                    rol = "OFICIAL";
+                } else {
+                    rol = "APRENDIZ";
+                }
+
+                // Cerrar login
                 setVisible(false);
-                
-                new Ventana(); // ← AQUÍ USA LA OTRA CLASE
+
+                // Abrir menú pasando el rol
+                new VentanaMenu(rol);
             }
         });
-        
+
         btnBorrar.setBounds(123, 164, 89, 23);
-        
+
         btnBorrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 textPassword.setText("");
@@ -66,6 +80,8 @@ public class VentanaLogin extends JFrame {
             }
         });
     }
+     
+    
     
     private void configLabels() {
         lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -89,4 +105,21 @@ public class VentanaLogin extends JFrame {
         getContentPane().add(btnBorrar);
         getContentPane().add(lblTitulo);
     }
+    
+//    private Usuario comprobarLogin(String usuario, String password) {
+//    	Usuario u = new Usuario();
+//   	
+//    	if (usuario.equals("Lucas")&& password.equals("Lucas")) {
+//    		u.setNombre(usuario);
+//    		u.setApellido1("apellido1");
+//    		u.setApellido2("apellido2");
+//    		u.setPassword(password);
+//    		u.setIdCategoria(3);
+//    		u.setCategoria("Aprendiz");
+//    		
+//    		
+//    		
+//    	}
+//    	return  u;
+//    }
 }
