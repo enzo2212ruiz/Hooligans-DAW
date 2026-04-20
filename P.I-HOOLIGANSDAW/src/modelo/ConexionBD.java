@@ -12,8 +12,8 @@ public class ConexionBD {
 
 	private static final String URL = "jdbc:mysql://localhost/ednamoda";
     private static final String USER = "root";
-    private static final String PASS = "12345678";
-    private static final String driver = "com.mysql.cj.jdbc.Driver";
+    private static final String PASS = "root";
+   
 
     /**
      * Con este metodo lo que conseguimos es conectarnos a la base de 

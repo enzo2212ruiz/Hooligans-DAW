@@ -13,7 +13,7 @@ public class ClienteB {
      */
     public List<Cliente> listar() {
         List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT * FROM CLIENTE";
+        String sql = "SELECT * FROM CLIENTE"; //sentencia de sql para que nos muestre la lista de clientes de la base de datos
         try (Connection con = ConexionBD.conectar();
              Statement st = con.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
@@ -29,7 +29,7 @@ public class ClienteB {
     }
 
     /**
-     * Inserta un nuevo cliente en la base de datos.
+     * Metodo para insertar un nuevo cliente en la base de datos
      */
     public boolean insertar(String nombre, String superpoder) {
         String sql = "INSERT INTO CLIENTE (nombre, superpoder) VALUES (?, ?)";

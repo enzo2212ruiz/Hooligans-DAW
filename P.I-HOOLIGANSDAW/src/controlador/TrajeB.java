@@ -22,7 +22,6 @@ public class TrajeB {
                 t.setId(rs.getInt("ID_traje"));
                 t.setNombre(rs.getString("nombre"));
                 t.setEstado(rs.getString("estado"));
-                // Si necesitas el ID_cliente también puedes añadirlo
                 lista.add(t);
             }
         } catch (Exception e) { e.printStackTrace(); }

@@ -1,4 +1,6 @@
-//Abre el menú según la categoría del usuario
+//Este es el archivo mas grande, es como un contenedor
+//Que nos muestra diferentes pantallas según la categoria 
+// del usuario que se meta (MAESTRO,OFICIAL o APRENDIZ)
 package vista;
 
 import javax.swing.*;
@@ -11,10 +13,18 @@ import controlador.*;
 
 public class VentanaMenu extends JFrame {
 
+    // Paneles que dividen la interfaz 
     private JPanel panelLateral, panelTop, panelContenido;
+    
+    // Botones del menú lateral
     private JButton btnCitas, btnClientes, btnTalleres, btnEmpleados;
+    
+    // Objeto que guarda los datos del usuario que ha iniciado sesión
     private Usuario usuario;
 
+    /**
+     * Constructor: Configura la ventana y lanza la creación de los paneles.
+     */
     public VentanaMenu(Usuario usuario) {
         this.usuario = usuario;
         setTitle("Menú principal - Edna Moda");
@@ -22,14 +32,20 @@ public class VentanaMenu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        // Llamadas a los métodos que dibujan cada parte
         crearPanelLateral();
         crearPanelTop();
         crearPanelContenido();
+        
+        // Aplica restricciones según el rol
         configurarPermisos(usuario.getCategoria());
 
         setVisible(true);
     }
 
+    /**
+     * Crea el menú de la izquierda con el logo 
+     */
     private void crearPanelLateral() {
         panelLateral = new JPanel();
         panelLateral.setLayout(null);
@@ -37,6 +53,7 @@ public class VentanaMenu extends JFrame {
         panelLateral.setBackground(new Color(45, 52, 54));
         getContentPane().add(panelLateral);
 
+       
         URL urlLogo = getClass().getResource("/img/logo_edna.png");
         if (urlLogo != null) {
             ImageIcon iconOriginal = new ImageIcon(urlLogo);
@@ -46,6 +63,7 @@ public class VentanaMenu extends JFrame {
             panelLateral.add(lblLogo);
         }
 
+        // Configuración de los botones 
         btnCitas = new JButton("Citas");
         btnCitas.setBounds(20, 180, 150, 35);
         panelLateral.add(btnCitas);
@@ -62,12 +80,16 @@ public class VentanaMenu extends JFrame {
         btnEmpleados.setBounds(20, 330, 150, 35);
         panelLateral.add(btnEmpleados);
 
+        // Asigna a cada botón la función de mostrarse en la tabla que les toca 
         btnCitas.addActionListener(e -> mostrarCitas());
         btnClientes.addActionListener(e -> mostrarClientes());
         btnTalleres.addActionListener(e -> mostrarTalleres());
         btnEmpleados.addActionListener(e -> mostrarEmpleados());
     }
 
+    /**
+     * Crea la barra superior que muestra el nombre del usuario y el botón de salir.
+     */
     private void crearPanelTop() {
         panelTop = new JPanel();
         panelTop.setLayout(null);
@@ -82,9 +104,13 @@ public class VentanaMenu extends JFrame {
         JButton btnCerrar = new JButton("Cerrar sesión");
         btnCerrar.setBounds(580, 25, 130, 30);
         panelTop.add(btnCerrar);
+        // Al darle a cerrar sesión vuelve al Login
         btnCerrar.addActionListener(e -> { dispose(); new VentanaLogin(); });
     }
 
+    /**
+     * Prepara el panel central donde se cargarán las tablas y formularios.
+     */
     private void crearPanelContenido() {
         panelContenido = new JPanel();
         panelContenido.setLayout(null);
@@ -93,12 +119,19 @@ public class VentanaMenu extends JFrame {
         getContentPane().add(panelContenido);
     }
 
+    /**
+     * Borra todo lo que haya en el panel central para rellenar los datos otra vez
+     * por si te has equivocado
+     */
     private void limpiarPanel() {
         panelContenido.removeAll();
         panelContenido.repaint();
         panelContenido.revalidate();
     }
 
+    /**
+     * Oculta botones del menú según el rol del empleado.
+     */
     private void configurarPermisos(String rol) {
         if (rol.equals("APRENDIZ")) {
             btnClientes.setVisible(false); btnTalleres.setVisible(false); btnEmpleados.setVisible(false);
@@ -107,7 +140,10 @@ public class VentanaMenu extends JFrame {
         }
     }
 
-    // --- SECCIÓN CITAS ---
+
+    /**
+     * Muestra la tabla con todas las citas registradas en la Base de datos.
+     */
     private void mostrarCitas() {
         limpiarPanel();
         JLabel lbl = new JLabel("GESTIÓN DE CITAS");
@@ -115,14 +151,15 @@ public class VentanaMenu extends JFrame {
         lbl.setFont(new Font("Tahoma", Font.BOLD, 16));
         panelContenido.add(lbl);
 
+        
         if (!usuario.getCategoria().equals("APRENDIZ")) {
             JButton btnNueva = new JButton("Nueva Cita");
             btnNueva.setBounds(570, 20, 150, 30);
-            btnNueva.setFocusPainted(false);
             panelContenido.add(btnNueva);
             btnNueva.addActionListener(e -> mostrarFormularioCita());
         }
 
+        // Crea la tabla y la rellena con datos del B de Citas
         String[] columnas = {"ID", "Fecha", "Hora", "Taller", "Responsable", "Traje"};
         DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
         for (Cita c : new CitaB().listarCitas()) {
@@ -134,6 +171,9 @@ public class VentanaMenu extends JFrame {
         panelContenido.add(scroll);
     }
 
+    /**
+     * Muestra el formulario para crear una cita con sus respectivas características
+     */
     private void mostrarFormularioCita() {
         limpiarPanel();
         JLabel lblTitulo = new JLabel("CREAR NUEVA CITA");
@@ -141,7 +181,7 @@ public class VentanaMenu extends JFrame {
         lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 16));
         panelContenido.add(lblTitulo);
 
-        // Campos comunes (Cliente, Taller, Fecha, Hora, Duración, Traje)
+        // Desplegables que cargan Clientes, Talleres y Trajes desde la BD
         JLabel l1 = new JLabel("Cliente:"); l1.setBounds(20, 70, 100, 25); panelContenido.add(l1);
         JComboBox<Cliente> cbClie = new JComboBox<>(); for(Cliente c : new ClienteB().listar()) cbClie.addItem(c);
         cbClie.setBounds(120, 70, 200, 25); panelContenido.add(cbClie);
@@ -160,7 +200,7 @@ public class VentanaMenu extends JFrame {
         JComboBox<Traje> cbTraje = new JComboBox<>(); for(Traje t : new TrajeB().listar()) cbTraje.addItem(t);
         cbTraje.setBounds(120, 190, 200, 25); panelContenido.add(cbTraje);
 
-        // Lógica de Responsable
+        // Gestión de empleado según el rol 
         JComboBox<Usuario> cbResp = new JComboBox<>();
         JComboBox<Usuario> cbAp1 = new JComboBox<>();
         JComboBox<Usuario> cbAp2 = new JComboBox<>();
@@ -178,6 +218,7 @@ public class VentanaMenu extends JFrame {
             panelContenido.add(cbAp1); panelContenido.add(cbAp2);
         }
 
+        // Botón para enviar los datos al B e insertar la cita
         JButton btnConf = new JButton("Confirmar");
         btnConf.setBounds(580, 500, 120, 30);
         panelContenido.add(btnConf);
@@ -202,7 +243,11 @@ public class VentanaMenu extends JFrame {
         btnVol.addActionListener(e -> mostrarCitas());
     }
 
-    // --- SECCIÓN CLIENTES ---
+
+
+    /**
+     * Muestra la tabla de clientes.
+     */
     private void mostrarClientes() {
         limpiarPanel();
         JLabel lbl = new JLabel("GESTIÓN DE CLIENTES");
@@ -226,6 +271,9 @@ public class VentanaMenu extends JFrame {
         panelContenido.add(scroll);
     }
 
+    /**
+     * Muestra el formulario para dar de alta un nuevo cliente.
+     */
     private void formularioNuevoCliente() {
         limpiarPanel();
         JLabel lbl = new JLabel("NUEVO CLIENTE");
@@ -246,7 +294,11 @@ public class VentanaMenu extends JFrame {
         btnV.addActionListener(e -> mostrarClientes());
     }
 
-    // --- SECCIÓN TALLERES ---
+   
+
+    /**
+     * Muestra la tabla de talleres disponibles.
+     */
     private void mostrarTalleres() {
         limpiarPanel();
         JLabel lbl = new JLabel("GESTIÓN DE TALLERES");
@@ -270,6 +322,9 @@ public class VentanaMenu extends JFrame {
         panelContenido.add(scroll);
     }
 
+    /**
+     * Muestra el formulario para crear un nuevo taller.
+     */
     private void formularioNuevoTaller() {
         limpiarPanel();
         JLabel lbl = new JLabel("NUEVO TALLER");
@@ -290,7 +345,9 @@ public class VentanaMenu extends JFrame {
         btnV.addActionListener(e -> mostrarTalleres());
     }
 
-    // --- SECCIÓN EMPLEADOS ---
+    /**
+     * Muestra la tabla de los empleados de la empresa.
+     */
     private void mostrarEmpleados() {
         limpiarPanel();
         JLabel lbl = new JLabel("GESTIÓN DE EMPLEADOS");
@@ -314,6 +371,9 @@ public class VentanaMenu extends JFrame {
         panelContenido.add(scroll);
     }
 
+    /**
+     * Muestra el formulario completo para registrar un nuevo empleado.
+     */
     private void formularioNuevoEmpleado() {
         limpiarPanel();
         JLabel lbl = new JLabel("NUEVO EMPLEADO");
@@ -334,6 +394,7 @@ public class VentanaMenu extends JFrame {
         String[] cats = {"MAESTRO", "OFICIAL", "APRENDIZ"};
         JComboBox<String> cbCat = new JComboBox<>(cats); cbCat.setBounds(150, 190, 200, 25); panelContenido.add(cbCat);
 
+        // Botón guardar: Envía los datos al UsuarioB para el INSERT
         JButton btnG = new JButton("Guardar"); btnG.setBounds(150, 240, 100, 30); panelContenido.add(btnG);
         btnG.addActionListener(e -> {
             if(new UsuarioB().insertar(tNom.getText(), tApodo.getText(), tPas.getText(), (String)cbCat.getSelectedItem())) { 

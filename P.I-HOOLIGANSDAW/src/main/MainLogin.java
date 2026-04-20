@@ -5,7 +5,7 @@ import vista.VentanaLogin;
 
 /**
  * Clase principal del programa.
- * Desde aquí arranca la aplicación con un estilo visual moderno.
+ * Desde aquí arranca la aplicación 
  */
 public class MainLogin {
     
