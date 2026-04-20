@@ -1,8 +1,6 @@
 package controlador;
 
-/**
- * Clase que representa un Traje en el sistema.
- */
+
 public class Traje {
     private int id;
     private String nombre;
@@ -18,7 +16,8 @@ public class Traje {
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
     
-    // Este método ayuda a que el ComboBox muestre el nombre
+    // Este método hacea que el ComboBox muestre el nombre al igual
+    // que en las otras clases
     @Override
     public String toString() {
         return nombre;

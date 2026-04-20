@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteDAO {
+public class ClienteB {
 
     /**
      * Obtiene la lista completa de clientes.
@@ -26,5 +26,21 @@ public class ClienteDAO {
             }
         } catch (Exception e) { e.printStackTrace(); }
         return lista;
+    }
+
+    /**
+     * Inserta un nuevo cliente en la base de datos.
+     */
+    public boolean insertar(String nombre, String superpoder) {
+        String sql = "INSERT INTO CLIENTE (nombre, superpoder) VALUES (?, ?)";
+        try (Connection con = ConexionBD.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            ps.setString(2, superpoder);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) { 
+            e.printStackTrace(); 
+            return false; 
+        }
     }
 }

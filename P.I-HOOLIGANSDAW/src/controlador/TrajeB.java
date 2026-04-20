@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrajeDAO {
+public class TrajeB {
 
     /**
      * Obtiene la lista de trajes.

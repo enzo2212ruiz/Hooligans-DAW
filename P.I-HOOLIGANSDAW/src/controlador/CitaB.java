@@ -9,14 +9,13 @@ import java.util.List;
 /**
  * Clase encargada de gestionar las citas en la base de datos.
  */
-public class CitaDAO {
+public class CitaB {
 
     /**
      * Obtiene el listado de citas con los nombres de taller, responsable y traje.
      */
     public List<Cita> listarCitas() {
         List<Cita> lista = new ArrayList<>();
-        // Query con JOINs para que en la tabla se vean nombres y no solo IDs
         String sql = "SELECT c.ID_cita, c.dia, c.hora, t.nombre as taller, e.nom_ape as responsable, tr.nombre as traje " +
                      "FROM CITA c " +
                      "JOIN TALLER t ON c.ID_taller = t.ID_taller " +

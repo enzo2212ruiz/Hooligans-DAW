@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JOptionPane;
 
 import controlador.Usuario;
-import controlador.UsuarioDAO;
+import controlador.UsuarioB;
 
 
 public class VentanaLogin extends JFrame {
@@ -79,7 +79,7 @@ public class VentanaLogin extends JFrame {
                 String password = textPassword.getText();
 
                 // Se crea el objeto que va a consultar la base de datos
-                UsuarioDAO dao = new UsuarioDAO();
+                UsuarioB dao = new UsuarioB();
 
                 // Se comprueba si el usuario existe en la BD
                 Usuario u = dao.login(usuario, password);

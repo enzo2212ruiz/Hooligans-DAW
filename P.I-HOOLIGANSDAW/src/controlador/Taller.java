@@ -14,6 +14,6 @@ public class Taller {
     public void setTipo(String tipo) { this.tipo = tipo; }
     @Override
     public String toString() {
-        return nombre; // Esto hará que el ComboBox muestre "Milán", "París", etc.
+        return nombre; 
     }
 }

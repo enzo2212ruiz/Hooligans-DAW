@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 /**
  * Clase encargada de realizar la conexión con la base de datos MySQL.
  * Centraliza los datos de acceso para que el resto del programa
- * pueda conectarse llamando al método conectar().
+ * pueda conectarse si llamamos al metodo conectar
  */
 public class ConexionBD {
 
@@ -15,19 +15,18 @@ public class ConexionBD {
     private static final String PASS = "root";
 
     /**
-     * Método que abre una conexión con la base de datos.
-     * @return objeto Connection si la conexión es correcta, o null si falla
+     * Con este metodo lo que conseguimos es conectarnos a la base de 
+     * datos y nos devuelva esa conexion o nos de un null si falla
      */
     public static Connection conectar() {
 
         Connection con = null;
 
         try {
-            // Intenta abrir la conexión con la BD
+           
             con = DriverManager.getConnection(URL, USER, PASS);
             System.out.println("Conexión correcta a la BD");
         } catch (Exception e) {
-            // Si falla, muestra mensaje de error
             System.out.println("Error en la conexión");
             e.printStackTrace();
         }
