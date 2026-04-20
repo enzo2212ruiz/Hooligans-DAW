@@ -10,9 +10,10 @@ import java.sql.DriverManager;
  */
 public class ConexionBD {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/EdnaModa";
+	private static final String URL = "jdbc:mysql://localhost/ednamoda";
     private static final String USER = "root";
-    private static final String PASS = "root";
+    private static final String PASS = "12345678";
+    private static final String driver = "com.mysql.cj.jdbc.Driver";
 
     /**
      * Con este metodo lo que conseguimos es conectarnos a la base de 
