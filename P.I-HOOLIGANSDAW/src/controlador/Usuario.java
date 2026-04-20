@@ -1,33 +1,27 @@
-//MODELO DE DATOS
 package controlador;
 
-/**
- * Clase que representa al usuario que inicia sesión en la aplicación.
- * En este caso, el usuario será un empleado de la base de datos.
- */
 public class Usuario {
-
-    // Nombre completo del empleado
+    private int id; // <--- ESTO ES LO QUE FALTA
     private String nombre;
-
-    // Categoría del empleado: APRENDIZ, OFICIAL o MAESTRO
     private String categoria;
 
-    
-    public String getNombre() {
-        return nombre;
-    }
+    // Getter y Setter para ID
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-   
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    
-    public String getCategoria() {
-        return categoria;
-    }
-    void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public String getCategoria() { return categoria; }
+    public void setCategoria(String categoria)
+    { this.categoria = categoria; }
+    @Override
+    public String toString() {
+        // Si no hay categoría (como en el caso de "-- Ninguno --"), solo muestra el nombre
+        if (categoria == null || categoria.trim().isEmpty()) {
+            return nombre;
+        }
+        // Para el resto, muestra: Nombre (CATEGORÍA)
+        return nombre + " (" + categoria + ")";
     }
 }
