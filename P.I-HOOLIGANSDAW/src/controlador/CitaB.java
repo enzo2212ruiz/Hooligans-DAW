@@ -74,8 +74,6 @@ public class CitaB {
                     psAsiste.executeUpdate();
                 }
             }
-
-            con.commit(); // Confirmamos los cambios
             return true;
         } catch (Exception e) {
             try { if (con != null) con.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }

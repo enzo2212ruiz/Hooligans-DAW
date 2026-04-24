@@ -183,11 +183,13 @@ public class VentanaMenu extends JFrame {
 
         // Desplegables que cargan Clientes, Talleres y Trajes desde la BD
         JLabel l1 = new JLabel("Cliente:"); l1.setBounds(20, 70, 100, 25); panelContenido.add(l1);
-        JComboBox<Cliente> cbClie = new JComboBox<>(); for(Cliente c : new ClienteB().listar()) cbClie.addItem(c);
+        JComboBox<Cliente> cbClie = new JComboBox<>(); 
+        for(Cliente c : new ClienteB().listar()) cbClie.addItem(c);
         cbClie.setBounds(120, 70, 200, 25); panelContenido.add(cbClie);
 
         JLabel l2 = new JLabel("Taller:"); l2.setBounds(20, 110, 100, 25); panelContenido.add(l2);
-        JComboBox<Taller> cbTall = new JComboBox<>(); for(Taller t : new TallerB().listar()) cbTall.addItem(t);
+        JComboBox<Taller> cbTall = new JComboBox<>();
+        for(Taller t : new TallerB().listar()) cbTall.addItem(t);
         cbTall.setBounds(120, 110, 200, 25); panelContenido.add(cbTall);
 
         JLabel l3 = new JLabel("Fecha:"); l3.setBounds(20, 150, 100, 25); panelContenido.add(l3);
@@ -197,7 +199,8 @@ public class VentanaMenu extends JFrame {
         JTextField tHor = new JTextField("10:00"); tHor.setBounds(280, 150, 80, 25); panelContenido.add(tHor);
 
         JLabel l5 = new JLabel("Traje:"); l5.setBounds(20, 190, 100, 25); panelContenido.add(l5);
-        JComboBox<Traje> cbTraje = new JComboBox<>(); for(Traje t : new TrajeB().listar()) cbTraje.addItem(t);
+        JComboBox<Traje> cbTraje = new JComboBox<>(); 
+        for(Traje t : new TrajeB().listar()) cbTraje.addItem(t);
         cbTraje.setBounds(120, 190, 200, 25); panelContenido.add(cbTraje);
 
         // Gestión de empleado según el rol 
