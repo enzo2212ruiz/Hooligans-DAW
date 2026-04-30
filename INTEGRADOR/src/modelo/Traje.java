@@ -1,0 +1,66 @@
+package modelo;
+
+public class Traje {
+
+	private int idTraje;
+	private String nombreTraje;
+	private String estadoTraje;
+	private int idCliente;
+	private String nombreCliente;
+
+	public Traje() {
+	}
+
+	public Traje(int idTraje, String nombreTraje, String estadoTraje, int idCliente, String nombreCliente) {
+		this.idTraje = idTraje;
+		this.nombreTraje = nombreTraje;
+		this.estadoTraje = estadoTraje;
+		this.idCliente = idCliente;
+		this.nombreCliente = nombreCliente;
+	}
+
+	public int getIdTraje() {
+		return idTraje;
+	}
+
+	public void setIdTraje(int idTraje) {
+		this.idTraje = idTraje;
+	}
+
+	public String getNombreTraje() {
+		return nombreTraje;
+	}
+
+	public void setNombreTraje(String nombreTraje) {
+		this.nombreTraje = nombreTraje;
+	}
+
+	public String getEstadoTraje() {
+		return estadoTraje;
+	}
+
+	public void setEstadoTraje(String estadoTraje) {
+		this.estadoTraje = estadoTraje;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public String getNombreCliente() {
+		return nombreCliente;
+	}
+
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
+	}
+
+	@Override
+	public String toString() {
+		return nombreTraje;
+	}
+}
