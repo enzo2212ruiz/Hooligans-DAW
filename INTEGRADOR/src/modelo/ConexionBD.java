@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConexionBD {
 
-    private static final String URL_BD = "jdbc:mysql://localhost:3306/EdnaModa";
+    private static final String URL_BD = "jdbc:mysql://localhost/ednamoda";
     private static final String USUARIO_BD = "root";
-    private static final String PASSWORD_BD = "root";
+    private static final String PASSWORD_BD = "12345678";
 
     public static Connection conectar() {
         Connection conexion = null;

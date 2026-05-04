@@ -90,6 +90,14 @@ public class PanelTrajes extends JPanel {
 		tablaTrajes.getTableHeader().setForeground(new Color(91, 62, 46));
 		tablaTrajes.getTableHeader().setBackground(new Color(230, 215, 200));
 
+		tablaTrajes.getColumnModel().getColumn(0).setMinWidth(0);
+		tablaTrajes.getColumnModel().getColumn(0).setMaxWidth(0);
+		tablaTrajes.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+		tablaTrajes.getColumnModel().getColumn(3).setMinWidth(0);
+		tablaTrajes.getColumnModel().getColumn(3).setMaxWidth(0);
+		tablaTrajes.getColumnModel().getColumn(3).setPreferredWidth(0);
+		
 		scrollTrajes = new JScrollPane(tablaTrajes);
 		scrollTrajes.setBounds(15, 15, 660, 270);
 		scrollTrajes.setBorder(BorderFactory.createLineBorder(new Color(220, 200, 180)));

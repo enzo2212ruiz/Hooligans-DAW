@@ -94,7 +94,23 @@ public class PanelCitas extends JPanel {
 		tablaCitas.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 13));
 		tablaCitas.getTableHeader().setForeground(new Color(91, 62, 46));
 		tablaCitas.getTableHeader().setBackground(new Color(230, 215, 200));
+		
+		tablaCitas.getColumnModel().getColumn(0).setMinWidth(0);
+		tablaCitas.getColumnModel().getColumn(0).setMaxWidth(0);
+		tablaCitas.getColumnModel().getColumn(0).setPreferredWidth(0);
 
+		tablaCitas.getColumnModel().getColumn(4).setMinWidth(0);
+		tablaCitas.getColumnModel().getColumn(4).setMaxWidth(0);
+		tablaCitas.getColumnModel().getColumn(4).setPreferredWidth(0);
+		
+		tablaCitas.getColumnModel().getColumn(6).setMinWidth(0);
+		tablaCitas.getColumnModel().getColumn(6).setMaxWidth(0);
+		tablaCitas.getColumnModel().getColumn(6).setPreferredWidth(0);
+
+		tablaCitas.getColumnModel().getColumn(8).setMinWidth(0);
+		tablaCitas.getColumnModel().getColumn(8).setMaxWidth(0);
+		tablaCitas.getColumnModel().getColumn(8).setPreferredWidth(0);
+		
 		scrollCitas = new JScrollPane(tablaCitas);
 		scrollCitas.setBounds(15, 15, 660, 270);
 		scrollCitas.setBorder(BorderFactory.createLineBorder(new Color(220, 200, 180)));

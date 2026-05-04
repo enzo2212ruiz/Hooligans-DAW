@@ -90,6 +90,14 @@ public class PanelEmpleados extends JPanel {
 		tablaEmpleados.getTableHeader().setForeground(new Color(91, 62, 46));
 		tablaEmpleados.getTableHeader().setBackground(new Color(230, 215, 200));
 
+		tablaEmpleados.getColumnModel().getColumn(0).setMinWidth(0);
+		tablaEmpleados.getColumnModel().getColumn(0).setMaxWidth(0);
+		tablaEmpleados.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+		tablaEmpleados.getColumnModel().getColumn(3).setMinWidth(0);
+		tablaEmpleados.getColumnModel().getColumn(3).setMaxWidth(0);
+		tablaEmpleados.getColumnModel().getColumn(3).setPreferredWidth(0);
+		
 		scrollEmpleados = new JScrollPane(tablaEmpleados);
 		scrollEmpleados.setBounds(15, 15, 660, 270);
 		scrollEmpleados.setBorder(BorderFactory.createLineBorder(new Color(220, 200, 180)));

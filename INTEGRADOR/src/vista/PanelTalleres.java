@@ -88,6 +88,10 @@ public class PanelTalleres extends JPanel {
 		tablaTalleres.getTableHeader().setForeground(new Color(91, 62, 46));
 		tablaTalleres.getTableHeader().setBackground(new Color(230, 215, 200));
 
+		tablaTalleres.getColumnModel().getColumn(0).setMinWidth(0);
+		tablaTalleres.getColumnModel().getColumn(0).setMaxWidth(0);
+		tablaTalleres.getColumnModel().getColumn(0).setPreferredWidth(0);
+		
 		scrollTalleres = new JScrollPane(tablaTalleres);
 		scrollTalleres.setBounds(15, 15, 660, 270);
 		scrollTalleres.setBorder(BorderFactory.createLineBorder(new Color(220, 200, 180)));
