@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.CitaControlador;
 import modelo.Cita;
+import modelo.Empleado;
 
 public class PanelCitas extends JPanel {
 
@@ -34,8 +35,11 @@ public class PanelCitas extends JPanel {
 	private JButton btnEliminarCita;
 
 	private CitaControlador citaControlador;
+	
+	private Empleado empleadoActual;
 
-	public PanelCitas() {
+	public PanelCitas(Empleado empleadoActual) {
+	    this.empleadoActual = empleadoActual;
 		citaControlador = new CitaControlador();
 
 		setBackground(new Color(245, 239, 230));
@@ -116,7 +120,7 @@ public class PanelCitas extends JPanel {
 		btnNuevaCita.addActionListener(e -> abrirFormularioNuevaCita());
 		btnEditarCita.addActionListener(e -> abrirFormularioEditarCita());
 		btnEliminarCita.addActionListener(e -> eliminarCita());
-
+		aplicarPermisos();
 		cargarCitas();
 	}
 
@@ -136,23 +140,39 @@ public class PanelCitas extends JPanel {
 		ArrayList<Cita> listaCitas = citaControlador.obtenerCitas();
 
 		for (Cita cita : listaCitas) {
-			Object[] fila = {
-					cita.getIdCita(),
-					cita.getFechaCita(),
-					cita.getHoraCita(),
-					cita.getDuracionCita(),
-					cita.getIdTaller(),
-					cita.getNombreTaller(),
-					cita.getIdResponsable(),
-					cita.getNombreResponsable(),
-					cita.getIdTraje(),
-					cita.getNombreTraje()
-			};
+		    if (empleadoActual.esAprendiz() &&
+		        cita.getIdResponsable() != empleadoActual.getIdEmpleado()) {
+		        continue;
+		    }
 
-			modeloCitas.addRow(fila);
+		    Object[] fila = {
+		        cita.getIdCita(),
+		        cita.getFechaCita(),
+		        cita.getHoraCita(),
+		        cita.getDuracionCita(),
+		        cita.getIdTaller(),
+		        cita.getNombreTaller(),
+		        cita.getIdResponsable(),
+		        cita.getNombreResponsable(),
+		        cita.getIdTraje(),
+		        cita.getNombreTraje()
+		    };
+
+		    modeloCitas.addRow(fila);
 		}
 	}
+	private void aplicarPermisos() {
 
+	    if (empleadoActual.esOficial()) {
+	        btnEliminarCita.setVisible(false);
+	    }
+
+	    if (empleadoActual.esAprendiz()) {
+	        btnNuevaCita.setVisible(false);
+	        btnEditarCita.setVisible(false);
+	        btnEliminarCita.setVisible(false);
+	    }
+	}
 	private Cita obtenerCitaSeleccionada() {
 		int filaSeleccionada = tablaCitas.getSelectedRow();
 
@@ -193,20 +213,28 @@ public class PanelCitas extends JPanel {
 		return cita;
 	}
 
-	private void abrirFormularioNuevaCita() {
-		VentanaCitaFormulario ventanaCitaFormulario = new VentanaCitaFormulario(this);
-		ventanaCitaFormulario.setVisible(true);
-	}
-
 	private void abrirFormularioEditarCita() {
-		Cita citaSeleccionada = obtenerCitaSeleccionada();
+	    Cita citaSeleccionada = obtenerCitaSeleccionada();
 
-		if (citaSeleccionada != null) {
-			VentanaCitaFormulario ventanaCitaFormulario = new VentanaCitaFormulario(this, citaSeleccionada);
-			ventanaCitaFormulario.setVisible(true);
-		}
+	    if (citaSeleccionada != null) {
+
+	        if (empleadoActual.esOficial() &&
+	            citaSeleccionada.getIdResponsable() != empleadoActual.getIdEmpleado()) {
+
+	            JOptionPane.showMessageDialog(this, "Solo puedes editar tus propias citas.");
+	            return;
+	        }
+
+	        VentanaCitaFormulario ventanaCitaFormulario =
+	                new VentanaCitaFormulario(this, citaSeleccionada);
+	        ventanaCitaFormulario.setVisible(true);
+	    }
 	}
-
+	private void abrirFormularioNuevaCita() {
+	    VentanaCitaFormulario ventanaCitaFormulario =
+	            new VentanaCitaFormulario(this);
+	    ventanaCitaFormulario.setVisible(true);
+	}
 	private void eliminarCita() {
 		Cita citaSeleccionada = obtenerCitaSeleccionada();
 

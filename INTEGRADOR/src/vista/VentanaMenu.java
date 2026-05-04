@@ -149,32 +149,29 @@ public class VentanaMenu extends JFrame {
 		btnEmpleados.addActionListener(e -> mostrarPanel(new PanelEmpleados()));
 		btnTalleres.addActionListener(e -> mostrarPanel(new PanelTalleres()));
 		btnTrajes.addActionListener(e -> mostrarPanel(new PanelTrajes()));
-		btnCitas.addActionListener(e -> mostrarPanel(new PanelCitas()));
+		btnCitas.addActionListener(e -> mostrarPanel(new PanelCitas(empleadoActual)));
 		btnCerrarSesion.addActionListener(e -> cerrarSesion());
 	}
 
 	private void aplicarPermisos() {
-		String categoria = empleadoActual.getCategoriaEmpleado();
 
-		if (categoria.equals("MAESTRO")) {
-			btnClientes.setVisible(true);
-			btnEmpleados.setVisible(true);
-			btnTalleres.setVisible(true);
-			btnTrajes.setVisible(true);
-			btnCitas.setVisible(true);
-		} else if (categoria.equals("OFICIAL")) {
-			btnClientes.setVisible(true);
-			btnEmpleados.setVisible(false);
-			btnTalleres.setVisible(false);
-			btnTrajes.setVisible(true);
-			btnCitas.setVisible(true);
-		} else if (categoria.equals("APRENDIZ")) {
-			btnClientes.setVisible(false);
-			btnEmpleados.setVisible(false);
-			btnTalleres.setVisible(false);
-			btnTrajes.setVisible(false);
-			btnCitas.setVisible(true);
-		}
+	    if (empleadoActual.esMaestro()) {
+	        return;
+	    }
+	    if (empleadoActual.esOficial()) {
+	        btnClientes.setVisible(false);
+	        btnEmpleados.setVisible(false);
+	        btnTalleres.setVisible(false);
+	        btnTrajes.setVisible(false);
+	        btnCitas.setVisible(true);
+	    }
+	    if (empleadoActual.esAprendiz()) {
+	        btnClientes.setVisible(false);
+	        btnEmpleados.setVisible(false);
+	        btnTalleres.setVisible(false);
+	        btnTrajes.setVisible(false);
+	        btnCitas.setVisible(true);
+	    }
 	}
 
 	private void recolocarBotones() {

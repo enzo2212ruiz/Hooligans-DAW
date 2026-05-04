@@ -62,7 +62,17 @@ public class Empleado {
 	public void setCategoriaEmpleado(String categoriaEmpleado) {
 		this.categoriaEmpleado = categoriaEmpleado;
 	}
+	public boolean esMaestro() {
+	    return "MAESTRO".equalsIgnoreCase(categoriaEmpleado);
+	}
 
+	public boolean esOficial() {
+	    return "OFICIAL".equalsIgnoreCase(categoriaEmpleado);
+	}
+
+	public boolean esAprendiz() {
+	    return "APRENDIZ".equalsIgnoreCase(categoriaEmpleado);
+	}
 	@Override
 	public String toString() {
 		return nombreEmpleado;
