@@ -1,4 +1,6 @@
 # Hooligans-DAW
 
-### Enlace Trello
-* [Trello del Proyecto](https://trello.com/invite/b/69b013ddc269cedce8d1579f/ATTI53a305c02e84ca5f153cdbf26899b998A48EF928/pi-hooligans-daw)
+### Github
+* [Github](https://github.com/enzo2212ruiz/Hooligans-DAW)
+### Trello
+* [Trello](https://trello.com/invite/b/69b013ddc269cedce8d1579f/ATTI53a305c02e84ca5f153cdbf26899b998A48EF928/pi-hooligans-daw)
