@@ -16,6 +16,9 @@ import javax.swing.SwingConstants;
 import controlador.LoginControlador;
 import modelo.Empleado;
 
+/**
+ * Ventana de inicio de sesión para acceder al sistema.
+ */
 public class VentanaLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,9 @@ public class VentanaLogin extends JFrame {
 
 	private LoginControlador loginControlador;
 
+	/**
+	 * Construye la ventana de login.
+	 */
 	public VentanaLogin() {
 		loginControlador = new LoginControlador();
 
@@ -52,6 +58,9 @@ public class VentanaLogin extends JFrame {
 		agregarComponentes();
 	}
 
+	/**
+	 * Configura los paneles principales.
+	 */
 	private void configurarPaneles() {
 		getContentPane().setLayout(null);
 
@@ -67,6 +76,9 @@ public class VentanaLogin extends JFrame {
 		panelLogin.setBorder(BorderFactory.createLineBorder(new Color(220, 200, 180)));
 	}
 
+	/**
+	 * Configura los labels del formulario.
+	 */
 	private void configurarLabels() {
 		lblTitulo = new JLabel("Edna Moda");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -91,20 +103,24 @@ public class VentanaLogin extends JFrame {
 		lblPassword.setBounds(70, 245, 150, 25);
 	}
 
+	/**
+	 * Configura los campos de texto.
+	 */
 	private void configurarCamposTexto() {
 		txtApodo = new JTextField();
 		txtApodo.setBounds(70, 195, 310, 38);
-		txtApodo.setColumns(10);
 		txtApodo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtApodo.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
 
 		txtPassword = new JPasswordField();
 		txtPassword.setBounds(70, 275, 310, 38);
-		txtPassword.setColumns(10);
 		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtPassword.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
 	}
 
+	/**
+	 * Configura los botones del formulario.
+	 */
 	private void configurarBotones() {
 		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(70, 365, 140, 42);
@@ -128,6 +144,9 @@ public class VentanaLogin extends JFrame {
 		txtPassword.addActionListener(e -> iniciarSesion());
 	}
 
+	/**
+	 * Agrega los componentes al panel.
+	 */
 	private void agregarComponentes() {
 		getContentPane().add(panelFondo);
 		panelFondo.add(panelLogin);
@@ -142,6 +161,9 @@ public class VentanaLogin extends JFrame {
 		panelLogin.add(btnLimpiar);
 	}
 
+	/**
+	 * Intenta iniciar sesión con los datos introducidos.
+	 */
 	private void iniciarSesion() {
 		String apodoEmpleado = txtApodo.getText().trim();
 		String passwordEmpleado = new String(txtPassword.getPassword()).trim();
@@ -164,12 +186,18 @@ public class VentanaLogin extends JFrame {
 		}
 	}
 
+	/**
+	 * Limpia los campos del formulario.
+	 */
 	private void limpiarCampos() {
 		txtApodo.setText("");
 		txtPassword.setText("");
 		txtApodo.requestFocus();
 	}
 
+	/**
+	 * Método principal para ejecutar la ventana de login.
+	 */
 	public static void main(String[] args) {
 		VentanaLogin ventanaLogin = new VentanaLogin();
 		ventanaLogin.setVisible(true);

@@ -18,6 +18,9 @@ import controlador.TrajeControlador;
 import modelo.Cliente;
 import modelo.Traje;
 
+/**
+ * Ventana para crear o editar un traje.
+ */
 public class VentanaTrajeFormulario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -42,7 +45,7 @@ public class VentanaTrajeFormulario extends JFrame {
 	private Traje trajeEditar;
 
 	/**
-	 * @wbp.parser.constructor
+	 * Constructor para crear un nuevo traje.
 	 */
 	public VentanaTrajeFormulario(PanelTrajes panelTrajes) {
 		this.panelTrajes = panelTrajes;
@@ -60,6 +63,9 @@ public class VentanaTrajeFormulario extends JFrame {
 		lblTitulo.setText("Nuevo traje");
 	}
 
+	/**
+	 * Constructor para editar un traje existente.
+	 */
 	public VentanaTrajeFormulario(PanelTrajes panelTrajes, Traje trajeEditar) {
 		this.panelTrajes = panelTrajes;
 		this.trajeEditar = trajeEditar;
@@ -77,6 +83,9 @@ public class VentanaTrajeFormulario extends JFrame {
 		lblTitulo.setText("Editar traje");
 	}
 
+	/**
+	 * Configura la ventana principal.
+	 */
 	private void configurarVentana() {
 		setTitle("Formulario traje");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -86,6 +95,9 @@ public class VentanaTrajeFormulario extends JFrame {
 		getContentPane().setLayout(null);
 	}
 
+	/**
+	 * Configura los paneles principales.
+	 */
 	private void configurarPaneles() {
 		panelFondo = new JPanel();
 		panelFondo.setLayout(null);
@@ -99,6 +111,9 @@ public class VentanaTrajeFormulario extends JFrame {
 		panelFormulario.setBounds(35, 30, 415, 325);
 	}
 
+	/**
+	 * Configura los labels del formulario.
+	 */
 	private void configurarLabels() {
 		lblTitulo = new JLabel();
 		lblTitulo.setFont(new Font("Serif", Font.BOLD, 30));
@@ -121,22 +136,24 @@ public class VentanaTrajeFormulario extends JFrame {
 		lblCliente.setBounds(35, 195, 120, 25);
 	}
 
+	/**
+	 * Configura los campos de texto y selección.
+	 */
 	private void configurarCampos() {
 		txtNombreTraje = new JTextField();
 		txtNombreTraje.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNombreTraje.setBounds(160, 85, 215, 30);
 		txtNombreTraje.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
-		txtNombreTraje.setColumns(10);
 
 		comboEstadoTraje = new JComboBox<String>();
 		comboEstadoTraje.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboEstadoTraje.setBounds(160, 140, 215, 30);
 		comboEstadoTraje.setBackground(new Color(255, 252, 247));
 		comboEstadoTraje.setForeground(new Color(55, 45, 40));
-		comboEstadoTraje.addItem("nuevo");
-		comboEstadoTraje.addItem("en proceso");
-		comboEstadoTraje.addItem("usado");
-		comboEstadoTraje.addItem("roto");
+		comboEstadoTraje.addItem("Nuevo");
+		comboEstadoTraje.addItem("En proceso");
+		comboEstadoTraje.addItem("Usado");
+		comboEstadoTraje.addItem("Roto");
 
 		comboCliente = new JComboBox<Cliente>();
 		comboCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -145,6 +162,9 @@ public class VentanaTrajeFormulario extends JFrame {
 		comboCliente.setForeground(new Color(55, 45, 40));
 	}
 
+	/**
+	 * Configura los botones del formulario.
+	 */
 	private void configurarBotones() {
 		btnGuardarTraje = crearBoton("Guardar");
 		btnGuardarTraje.setBounds(145, 265, 110, 35);
@@ -156,6 +176,9 @@ public class VentanaTrajeFormulario extends JFrame {
 		btnCancelar.addActionListener(e -> dispose());
 	}
 
+	/**
+	 * Crea un botón estilizado.
+	 */
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -166,6 +189,9 @@ public class VentanaTrajeFormulario extends JFrame {
 		return boton;
 	}
 
+	/**
+	 * Agrega todos los componentes al formulario.
+	 */
 	private void agregarComponentes() {
 		getContentPane().add(panelFondo);
 		panelFondo.add(panelFormulario);
@@ -181,6 +207,9 @@ public class VentanaTrajeFormulario extends JFrame {
 		panelFormulario.add(btnCancelar);
 	}
 
+	/**
+	 * Carga los clientes en el combo correspondiente.
+	 */
 	private void cargarClientes() {
 		ArrayList<Cliente> listaClientes = trajeControlador.obtenerClientes();
 
@@ -189,21 +218,25 @@ public class VentanaTrajeFormulario extends JFrame {
 		}
 	}
 
+	/**
+	 * Carga los datos del traje en el formulario para edición.
+	 */
 	private void cargarDatosTraje() {
 		if (trajeEditar != null) {
 			txtNombreTraje.setText(trajeEditar.getNombreTraje());
 			comboEstadoTraje.setSelectedItem(trajeEditar.getEstadoTraje());
 
 			for (int i = 0; i < comboCliente.getItemCount(); i++) {
-				Cliente cliente = comboCliente.getItemAt(i);
-
-				if (cliente.getIdCliente() == trajeEditar.getIdCliente()) {
+				if (comboCliente.getItemAt(i).getIdCliente() == trajeEditar.getIdCliente()) {
 					comboCliente.setSelectedIndex(i);
 				}
 			}
 		}
 	}
 
+	/**
+	 * Guarda o modifica el traje según corresponda.
+	 */
 	private void guardarTraje() {
 		String nombreTraje = txtNombreTraje.getText();
 		String estadoTraje = comboEstadoTraje.getSelectedItem().toString();
@@ -217,15 +250,9 @@ public class VentanaTrajeFormulario extends JFrame {
 		boolean guardado;
 
 		if (trajeEditar == null) {
-			guardado = trajeControlador.guardarTraje(
-					nombreTraje,
-					estadoTraje,
-					clienteSeleccionado.getIdCliente());
+			guardado = trajeControlador.guardarTraje(nombreTraje, estadoTraje, clienteSeleccionado.getIdCliente());
 		} else {
-			guardado = trajeControlador.modificarTraje(
-					trajeEditar.getIdTraje(),
-					nombreTraje,
-					estadoTraje,
+			guardado = trajeControlador.modificarTraje(trajeEditar.getIdTraje(), nombreTraje, estadoTraje,
 					clienteSeleccionado.getIdCliente());
 		}
 

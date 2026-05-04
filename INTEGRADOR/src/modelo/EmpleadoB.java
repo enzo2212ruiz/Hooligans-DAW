@@ -6,8 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Clase encargada de gestionar las operaciones de base de datos relacionadas
+ * con los empleados.
+ */
 public class EmpleadoB {
 
+	/**
+	 * Comprueba las credenciales de inicio de sesión.
+	 * 
+	 * @return el empleado si coincide, o null si no existe
+	 */
 	public Empleado comprobarLogin(String apodoEmpleado, String passwordEmpleado) {
 		Empleado empleado = null;
 
@@ -44,6 +53,11 @@ public class EmpleadoB {
 		return empleado;
 	}
 
+	/**
+	 * Obtiene todos los empleados de la base de datos.
+	 * 
+	 * @return lista de empleados
+	 */
 	public ArrayList<Empleado> obtenerEmpleados() {
 		ArrayList<Empleado> listaEmpleados = new ArrayList<Empleado>();
 
@@ -78,6 +92,11 @@ public class EmpleadoB {
 		return listaEmpleados;
 	}
 
+	/**
+	 * Inserta un nuevo empleado en la base de datos.
+	 * 
+	 * @return true si se insertó correctamente
+	 */
 	public boolean insertarEmpleado(Empleado empleado) {
 		String sql = "INSERT INTO EMPLEADO (nom_ape, apodo, password, categoria) VALUES (?, ?, ?, ?)";
 
@@ -104,6 +123,11 @@ public class EmpleadoB {
 		}
 	}
 
+	/**
+	 * Modifica un empleado existente en la base de datos.
+	 * 
+	 * @return true si se modificó correctamente
+	 */
 	public boolean modificarEmpleado(Empleado empleado) {
 		String sql = "UPDATE EMPLEADO SET nom_ape = ?, apodo = ?, password = ?, categoria = ? WHERE ID_empleado = ?";
 
@@ -131,6 +155,11 @@ public class EmpleadoB {
 		}
 	}
 
+	/**
+	 * Elimina un empleado por su ID.
+	 * 
+	 * @return true si se eliminó correctamente
+	 */
 	public boolean eliminarEmpleado(int idEmpleado) {
 		String sql = "DELETE FROM EMPLEADO WHERE ID_empleado = ?";
 

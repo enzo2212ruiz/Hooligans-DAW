@@ -6,8 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Clase encargada de gestionar las operaciones de base de datos relacionadas
+ * con los clientes.
+ */
 public class ClienteB {
 
+	/**
+	 * Obtiene todos los clientes de la base de datos.
+	 * 
+	 * @return lista de clientes
+	 */
 	public ArrayList<Cliente> obtenerClientes() {
 		ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 
@@ -40,6 +49,11 @@ public class ClienteB {
 		return listaClientes;
 	}
 
+	/**
+	 * Inserta un nuevo cliente en la base de datos.
+	 * 
+	 * @return true si se insertó correctamente
+	 */
 	public boolean insertarCliente(Cliente cliente) {
 		String sql = "INSERT INTO CLIENTE (nombre, superpoder) VALUES (?, ?)";
 
@@ -64,6 +78,11 @@ public class ClienteB {
 		}
 	}
 
+	/**
+	 * Modifica un cliente existente en la base de datos.
+	 * 
+	 * @return true si se modificó correctamente
+	 */
 	public boolean modificarCliente(Cliente cliente) {
 		String sql = "UPDATE CLIENTE SET nombre = ?, superpoder = ? WHERE ID_cliente = ?";
 
@@ -89,6 +108,11 @@ public class ClienteB {
 		}
 	}
 
+	/**
+	 * Elimina un cliente por su ID.
+	 * 
+	 * @return true si se eliminó correctamente
+	 */
 	public boolean eliminarCliente(int idCliente) {
 		String sql = "DELETE FROM CLIENTE WHERE ID_cliente = ?";
 

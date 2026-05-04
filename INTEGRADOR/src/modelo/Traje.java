@@ -1,5 +1,8 @@
 package modelo;
 
+/**
+ * Modelo que representa un traje.
+ */
 public class Traje {
 
 	private int idTraje;
@@ -8,9 +11,15 @@ public class Traje {
 	private int idCliente;
 	private String nombreCliente;
 
+	/**
+	 * Constructor vacío.
+	 */
 	public Traje() {
 	}
 
+	/**
+	 * Constructor con todos los datos del traje.
+	 */
 	public Traje(int idTraje, String nombreTraje, String estadoTraje, int idCliente, String nombreCliente) {
 		this.idTraje = idTraje;
 		this.nombreTraje = nombreTraje;
@@ -59,6 +68,9 @@ public class Traje {
 		this.nombreCliente = nombreCliente;
 	}
 
+	/**
+	 * Devuelve el nombre del traje como representación del objeto.
+	 */
 	@Override
 	public String toString() {
 		return nombreTraje;

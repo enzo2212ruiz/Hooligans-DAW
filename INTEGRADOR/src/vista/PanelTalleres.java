@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import controlador.TallerControlador;
 import modelo.Taller;
 
+/**
+ * Panel encargado de gestionar la visualización y administración de talleres.
+ */
 public class PanelTalleres extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +38,9 @@ public class PanelTalleres extends JPanel {
 
 	private TallerControlador tallerControlador;
 
+	/**
+	 * Construye el panel de gestión de talleres.
+	 */
 	public PanelTalleres() {
 		tallerControlador = new TallerControlador();
 
@@ -86,7 +92,7 @@ public class PanelTalleres extends JPanel {
 		tablaTalleres.getColumnModel().getColumn(0).setMinWidth(0);
 		tablaTalleres.getColumnModel().getColumn(0).setMaxWidth(0);
 		tablaTalleres.getColumnModel().getColumn(0).setPreferredWidth(0);
-		
+
 		scrollTalleres = new JScrollPane(tablaTalleres);
 		scrollTalleres.setBounds(15, 15, 660, 270);
 		scrollTalleres.setBorder(BorderFactory.createLineBorder(new Color(220, 200, 180)));
@@ -100,6 +106,9 @@ public class PanelTalleres extends JPanel {
 		cargarTalleres();
 	}
 
+	/**
+	 * Crea un botón estilizado.
+	 */
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -110,22 +119,24 @@ public class PanelTalleres extends JPanel {
 		return boton;
 	}
 
+	/**
+	 * Carga los talleres en la tabla.
+	 */
 	private void cargarTalleres() {
 		modeloTalleres.setRowCount(0);
 
 		ArrayList<Taller> listaTalleres = tallerControlador.obtenerTalleres();
 
 		for (Taller taller : listaTalleres) {
-			Object[] fila = {
-					taller.getIdTaller(),
-					taller.getNombreTaller(),
-					taller.getTipoTaller()
-			};
+			Object[] fila = { taller.getIdTaller(), taller.getNombreTaller(), taller.getTipoTaller() };
 
 			modeloTalleres.addRow(fila);
 		}
 	}
 
+	/**
+	 * Obtiene el taller seleccionado en la tabla.
+	 */
 	private Taller obtenerTallerSeleccionado() {
 		int filaSeleccionada = tablaTalleres.getSelectedRow();
 
@@ -146,11 +157,17 @@ public class PanelTalleres extends JPanel {
 		return taller;
 	}
 
+	/**
+	 * Abre el formulario para crear un nuevo taller.
+	 */
 	private void abrirFormularioNuevoTaller() {
 		VentanaTallerFormulario ventanaTallerFormulario = new VentanaTallerFormulario(this);
 		ventanaTallerFormulario.setVisible(true);
 	}
 
+	/**
+	 * Abre el formulario para editar un taller seleccionado.
+	 */
 	private void abrirFormularioEditarTaller() {
 		Taller tallerSeleccionado = obtenerTallerSeleccionado();
 
@@ -160,14 +177,15 @@ public class PanelTalleres extends JPanel {
 		}
 	}
 
+	/**
+	 * Elimina el taller seleccionado previa confirmación.
+	 */
 	private void eliminarTaller() {
 		Taller tallerSeleccionado = obtenerTallerSeleccionado();
 
 		if (tallerSeleccionado != null) {
-			int opcion = JOptionPane.showConfirmDialog(this,
-					"¿Seguro que quieres eliminar este taller?",
-					"Confirmar eliminación",
-					JOptionPane.YES_NO_OPTION);
+			int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro que quieres eliminar este taller?",
+					"Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
 			if (opcion == JOptionPane.YES_OPTION) {
 				boolean eliminado = tallerControlador.eliminarTaller(tallerSeleccionado.getIdTaller());
@@ -182,6 +200,9 @@ public class PanelTalleres extends JPanel {
 		}
 	}
 
+	/**
+	 * Refresca la tabla recargando los talleres.
+	 */
 	public void refrescarTablaTalleres() {
 		cargarTalleres();
 	}

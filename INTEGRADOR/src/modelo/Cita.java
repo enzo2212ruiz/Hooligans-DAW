@@ -1,5 +1,8 @@
 package modelo;
 
+/**
+ * Modelo que representa una cita con toda su información.
+ */
 public class Cita {
 
 	private int idCita;
@@ -15,11 +18,17 @@ public class Cita {
 	private String nombreResponsable;
 	private String nombreTraje;
 
+	/**
+	 * Constructor vacío.
+	 */
 	public Cita() {
 	}
 
-	public Cita(int idCita, String fechaCita, String horaCita, int duracionCita, int idTaller,
-			int idResponsable, int idTraje, String nombreTaller, String nombreResponsable, String nombreTraje) {
+	/**
+	 * Constructor con todos los datos de la cita.
+	 */
+	public Cita(int idCita, String fechaCita, String horaCita, int duracionCita, int idTaller, int idResponsable,
+			int idTraje, String nombreTaller, String nombreResponsable, String nombreTraje) {
 		this.idCita = idCita;
 		this.fechaCita = fechaCita;
 		this.horaCita = horaCita;
@@ -112,6 +121,9 @@ public class Cita {
 		this.nombreTraje = nombreTraje;
 	}
 
+	/**
+	 * Devuelve una representación simple de la cita.
+	 */
 	@Override
 	public String toString() {
 		return fechaCita + " - " + horaCita;

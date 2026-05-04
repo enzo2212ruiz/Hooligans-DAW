@@ -6,16 +6,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Clase encargada de gestionar las operaciones de base de datos relacionadas
+ * con los trajes.
+ */
 public class TrajeB {
 
+	/**
+	 * Obtiene todos los trajes de la base de datos.
+	 * 
+	 * @return lista de trajes
+	 */
 	public ArrayList<Traje> obtenerTrajes() {
 		ArrayList<Traje> listaTrajes = new ArrayList<Traje>();
 
 		String sql = "SELECT TRAJE.ID_traje, TRAJE.nombre, TRAJE.estado, "
-				+ "TRAJE.ID_cliente, CLIENTE.nombre AS nombre_cliente "
-				+ "FROM TRAJE "
-				+ "INNER JOIN CLIENTE ON TRAJE.ID_cliente = CLIENTE.ID_cliente "
-				+ "ORDER BY TRAJE.ID_traje";
+				+ "TRAJE.ID_cliente, CLIENTE.nombre AS nombre_cliente " + "FROM TRAJE "
+				+ "INNER JOIN CLIENTE ON TRAJE.ID_cliente = CLIENTE.ID_cliente " + "ORDER BY TRAJE.ID_traje";
 
 		try {
 			Connection conexion = ConexionBD.conectar();
@@ -46,6 +53,11 @@ public class TrajeB {
 		return listaTrajes;
 	}
 
+	/**
+	 * Inserta un nuevo traje en la base de datos.
+	 * 
+	 * @return true si se insertó correctamente
+	 */
 	public boolean insertarTraje(Traje traje) {
 		String sql = "INSERT INTO TRAJE (nombre, estado, ID_cliente) VALUES (?, ?, ?)";
 
@@ -71,6 +83,11 @@ public class TrajeB {
 		}
 	}
 
+	/**
+	 * Modifica un traje existente en la base de datos.
+	 * 
+	 * @return true si se modificó correctamente
+	 */
 	public boolean modificarTraje(Traje traje) {
 		String sql = "UPDATE TRAJE SET nombre = ?, estado = ?, ID_cliente = ? WHERE ID_traje = ?";
 
@@ -97,6 +114,11 @@ public class TrajeB {
 		}
 	}
 
+	/**
+	 * Elimina un traje por su ID.
+	 * 
+	 * @return true si se eliminó correctamente
+	 */
 	public boolean eliminarTraje(int idTraje) {
 		String sql = "DELETE FROM TRAJE WHERE ID_traje = ?";
 

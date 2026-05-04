@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import controlador.TrajeControlador;
 import modelo.Traje;
 
+/**
+ * Panel encargado de gestionar la visualización y administración de trajes.
+ */
 public class PanelTrajes extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +38,9 @@ public class PanelTrajes extends JPanel {
 
 	private TrajeControlador trajeControlador;
 
+	/**
+	 * Construye el panel de gestión de trajes.
+	 */
 	public PanelTrajes() {
 		trajeControlador = new TrajeControlador();
 
@@ -60,7 +66,7 @@ public class PanelTrajes extends JPanel {
 		btnEliminarTraje = crearBoton("Eliminar");
 		btnEliminarTraje.setBounds(335, 85, 135, 38);
 		add(btnEliminarTraje);
-		
+
 		panelTabla = new JPanel();
 		panelTabla.setLayout(null);
 		panelTabla.setBackground(new Color(255, 252, 247));
@@ -92,7 +98,7 @@ public class PanelTrajes extends JPanel {
 		tablaTrajes.getColumnModel().getColumn(3).setMinWidth(0);
 		tablaTrajes.getColumnModel().getColumn(3).setMaxWidth(0);
 		tablaTrajes.getColumnModel().getColumn(3).setPreferredWidth(0);
-		
+
 		scrollTrajes = new JScrollPane(tablaTrajes);
 		scrollTrajes.setBounds(15, 15, 660, 270);
 		scrollTrajes.setBorder(BorderFactory.createLineBorder(new Color(220, 200, 180)));
@@ -106,6 +112,9 @@ public class PanelTrajes extends JPanel {
 		cargarTrajes();
 	}
 
+	/**
+	 * Crea un botón estilizado.
+	 */
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -116,24 +125,25 @@ public class PanelTrajes extends JPanel {
 		return boton;
 	}
 
+	/**
+	 * Carga los trajes en la tabla.
+	 */
 	private void cargarTrajes() {
 		modeloTrajes.setRowCount(0);
 
 		ArrayList<Traje> listaTrajes = trajeControlador.obtenerTrajes();
 
 		for (Traje traje : listaTrajes) {
-			Object[] fila = {
-					traje.getIdTraje(),
-					traje.getNombreTraje(),
-					traje.getEstadoTraje(),
-					traje.getIdCliente(),
-					traje.getNombreCliente()
-			};
+			Object[] fila = { traje.getIdTraje(), traje.getNombreTraje(), traje.getEstadoTraje(), traje.getIdCliente(),
+					traje.getNombreCliente() };
 
 			modeloTrajes.addRow(fila);
 		}
 	}
 
+	/**
+	 * Obtiene el traje seleccionado en la tabla.
+	 */
 	private Traje obtenerTrajeSeleccionado() {
 		int filaSeleccionada = tablaTrajes.getSelectedRow();
 
@@ -158,11 +168,17 @@ public class PanelTrajes extends JPanel {
 		return traje;
 	}
 
+	/**
+	 * Abre el formulario para crear un nuevo traje.
+	 */
 	private void abrirFormularioNuevoTraje() {
 		VentanaTrajeFormulario ventanaTrajeFormulario = new VentanaTrajeFormulario(this);
 		ventanaTrajeFormulario.setVisible(true);
 	}
 
+	/**
+	 * Abre el formulario para editar un traje seleccionado.
+	 */
 	private void abrirFormularioEditarTraje() {
 		Traje trajeSeleccionado = obtenerTrajeSeleccionado();
 
@@ -172,14 +188,15 @@ public class PanelTrajes extends JPanel {
 		}
 	}
 
+	/**
+	 * Elimina el traje seleccionado previa confirmación.
+	 */
 	private void eliminarTraje() {
 		Traje trajeSeleccionado = obtenerTrajeSeleccionado();
 
 		if (trajeSeleccionado != null) {
-			int opcion = JOptionPane.showConfirmDialog(this,
-					"¿Seguro que quieres eliminar este traje?",
-					"Confirmar eliminación",
-					JOptionPane.YES_NO_OPTION);
+			int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro que quieres eliminar este traje?",
+					"Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
 			if (opcion == JOptionPane.YES_OPTION) {
 				boolean eliminado = trajeControlador.eliminarTraje(trajeSeleccionado.getIdTraje());
@@ -194,6 +211,9 @@ public class PanelTrajes extends JPanel {
 		}
 	}
 
+	/**
+	 * Refresca la tabla recargando los trajes.
+	 */
 	public void refrescarTablaTrajes() {
 		cargarTrajes();
 	}

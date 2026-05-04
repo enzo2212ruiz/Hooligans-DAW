@@ -1,14 +1,23 @@
 package modelo;
 
+/**
+ * Modelo que representa a un cliente.
+ */
 public class Cliente {
 
 	private int idCliente;
 	private String nombreCliente;
 	private String superpoderCliente;
 
+	/**
+	 * Constructor vacío.
+	 */
 	public Cliente() {
 	}
 
+	/**
+	 * Constructor con todos los datos del cliente.
+	 */
 	public Cliente(int idCliente, String nombreCliente, String superpoderCliente) {
 		this.idCliente = idCliente;
 		this.nombreCliente = nombreCliente;
@@ -39,6 +48,9 @@ public class Cliente {
 		this.superpoderCliente = superpoderCliente;
 	}
 
+	/**
+	 * Devuelve el nombre del cliente como representación del objeto.
+	 */
 	@Override
 	public String toString() {
 		return nombreCliente;

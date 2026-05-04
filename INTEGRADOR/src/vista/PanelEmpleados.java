@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import controlador.EmpleadoControlador;
 import modelo.Empleado;
 
+/**
+ * Panel encargado de gestionar la visualización y administración de empleados.
+ */
 public class PanelEmpleados extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +38,9 @@ public class PanelEmpleados extends JPanel {
 
 	private EmpleadoControlador empleadoControlador;
 
+	/**
+	 * Construye el panel de gestión de empleados.
+	 */
 	public PanelEmpleados() {
 		empleadoControlador = new EmpleadoControlador();
 
@@ -60,7 +66,6 @@ public class PanelEmpleados extends JPanel {
 		btnEliminarEmpleado = crearBoton("Eliminar");
 		btnEliminarEmpleado.setBounds(335, 85, 135, 38);
 		add(btnEliminarEmpleado);
-
 
 		panelTabla = new JPanel();
 		panelTabla.setLayout(null);
@@ -93,7 +98,7 @@ public class PanelEmpleados extends JPanel {
 		tablaEmpleados.getColumnModel().getColumn(3).setMinWidth(0);
 		tablaEmpleados.getColumnModel().getColumn(3).setMaxWidth(0);
 		tablaEmpleados.getColumnModel().getColumn(3).setPreferredWidth(0);
-		
+
 		scrollEmpleados = new JScrollPane(tablaEmpleados);
 		scrollEmpleados.setBounds(15, 15, 660, 270);
 		scrollEmpleados.setBorder(BorderFactory.createLineBorder(new Color(220, 200, 180)));
@@ -107,6 +112,9 @@ public class PanelEmpleados extends JPanel {
 		cargarEmpleados();
 	}
 
+	/**
+	 * Crea un botón estilizado.
+	 */
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -117,24 +125,25 @@ public class PanelEmpleados extends JPanel {
 		return boton;
 	}
 
+	/**
+	 * Carga los empleados en la tabla.
+	 */
 	private void cargarEmpleados() {
 		modeloEmpleados.setRowCount(0);
 
 		ArrayList<Empleado> listaEmpleados = empleadoControlador.obtenerEmpleados();
 
 		for (Empleado empleado : listaEmpleados) {
-			Object[] fila = {
-					empleado.getIdEmpleado(),
-					empleado.getNombreEmpleado(),
-					empleado.getApodoEmpleado(),
-					empleado.getPasswordEmpleado(),
-					empleado.getCategoriaEmpleado()
-			};
+			Object[] fila = { empleado.getIdEmpleado(), empleado.getNombreEmpleado(), empleado.getApodoEmpleado(),
+					empleado.getPasswordEmpleado(), empleado.getCategoriaEmpleado() };
 
 			modeloEmpleados.addRow(fila);
 		}
 	}
 
+	/**
+	 * Obtiene el empleado seleccionado en la tabla.
+	 */
 	private Empleado obtenerEmpleadoSeleccionado() {
 		int filaSeleccionada = tablaEmpleados.getSelectedRow();
 
@@ -159,11 +168,17 @@ public class PanelEmpleados extends JPanel {
 		return empleado;
 	}
 
+	/**
+	 * Abre el formulario para crear un nuevo empleado.
+	 */
 	private void abrirFormularioNuevoEmpleado() {
 		VentanaEmpleadoFormulario ventanaEmpleadoFormulario = new VentanaEmpleadoFormulario(this);
 		ventanaEmpleadoFormulario.setVisible(true);
 	}
 
+	/**
+	 * Abre el formulario para editar un empleado seleccionado.
+	 */
 	private void abrirFormularioEditarEmpleado() {
 		Empleado empleadoSeleccionado = obtenerEmpleadoSeleccionado();
 
@@ -174,14 +189,15 @@ public class PanelEmpleados extends JPanel {
 		}
 	}
 
+	/**
+	 * Elimina el empleado seleccionado previa confirmación.
+	 */
 	private void eliminarEmpleado() {
 		Empleado empleadoSeleccionado = obtenerEmpleadoSeleccionado();
 
 		if (empleadoSeleccionado != null) {
-			int opcion = JOptionPane.showConfirmDialog(this,
-					"¿Seguro que quieres eliminar este empleado?",
-					"Confirmar eliminación",
-					JOptionPane.YES_NO_OPTION);
+			int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro que quieres eliminar este empleado?",
+					"Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
 			if (opcion == JOptionPane.YES_OPTION) {
 				boolean eliminado = empleadoControlador.eliminarEmpleado(empleadoSeleccionado.getIdEmpleado());
@@ -196,6 +212,9 @@ public class PanelEmpleados extends JPanel {
 		}
 	}
 
+	/**
+	 * Refresca la tabla recargando los empleados.
+	 */
 	public void refrescarTablaEmpleados() {
 		cargarEmpleados();
 	}

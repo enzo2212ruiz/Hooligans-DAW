@@ -7,24 +7,45 @@ import modelo.ClienteB;
 import modelo.Traje;
 import modelo.TrajeB;
 
+/**
+ * Controlador que gestiona las operaciones relacionadas con los trajes.
+ */
 public class TrajeControlador {
 
 	private TrajeB trajeB;
 	private ClienteB clienteB;
 
+	/**
+	 * Inicializa el acceso a los datos de trajes y clientes.
+	 */
 	public TrajeControlador() {
 		trajeB = new TrajeB();
 		clienteB = new ClienteB();
 	}
 
+	/**
+	 * Obtiene la lista de trajes.
+	 * 
+	 * @return lista de trajes
+	 */
 	public ArrayList<Traje> obtenerTrajes() {
 		return trajeB.obtenerTrajes();
 	}
 
+	/**
+	 * Obtiene la lista de clientes.
+	 * 
+	 * @return lista de clientes
+	 */
 	public ArrayList<Cliente> obtenerClientes() {
 		return clienteB.obtenerClientes();
 	}
 
+	/**
+	 * Guarda un nuevo traje si los datos son válidos.
+	 * 
+	 * @return true si se guardó correctamente
+	 */
 	public boolean guardarTraje(String nombreTraje, String estadoTraje, int idCliente) {
 
 		if (nombreTraje == null || nombreTraje.trim().isEmpty()) {
@@ -47,6 +68,11 @@ public class TrajeControlador {
 		return trajeB.insertarTraje(traje);
 	}
 
+	/**
+	 * Modifica un traje existente si los datos son válidos.
+	 * 
+	 * @return true si se modificó correctamente
+	 */
 	public boolean modificarTraje(int idTraje, String nombreTraje, String estadoTraje, int idCliente) {
 
 		if (idTraje <= 0) {
@@ -74,6 +100,11 @@ public class TrajeControlador {
 		return trajeB.modificarTraje(traje);
 	}
 
+	/**
+	 * Elimina un traje por su ID.
+	 * 
+	 * @return true si se eliminó correctamente
+	 */
 	public boolean eliminarTraje(int idTraje) {
 
 		if (idTraje <= 0) {

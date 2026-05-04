@@ -12,6 +12,10 @@ import javax.swing.SwingConstants;
 
 import modelo.Empleado;
 
+/**
+ * Ventana principal del sistema tras iniciar sesión. Muestra el menú lateral y
+ * carga los distintos paneles de gestión.
+ */
 public class VentanaMenu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +39,9 @@ public class VentanaMenu extends JFrame {
 
 	private Empleado empleadoActual;
 
+	/**
+	 * Construye la ventana del menú principal para el empleado autenticado.
+	 */
 	public VentanaMenu(Empleado empleadoActual) {
 		this.empleadoActual = empleadoActual;
 
@@ -54,6 +61,9 @@ public class VentanaMenu extends JFrame {
 		mostrarInicio();
 	}
 
+	/**
+	 * Configura los paneles principales de la ventana.
+	 */
 	private void configurarPaneles() {
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBackground(new Color(245, 239, 230));
@@ -80,6 +90,9 @@ public class VentanaMenu extends JFrame {
 		panelPrincipal.add(panelContenido);
 	}
 
+	/**
+	 * Configura los labels del menú y cabecera.
+	 */
 	private void configurarLabels() {
 		lblTitulo = new JLabel("EDNA MODA");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -95,14 +108,17 @@ public class VentanaMenu extends JFrame {
 		lblSubtitulo.setBounds(20, 62, 180, 25);
 		panelMenu.add(lblSubtitulo);
 
-		lblEmpleadoActual = new JLabel("Empleado: " + empleadoActual.getNombreEmpleado() + " ("
-				+ empleadoActual.getCategoriaEmpleado() + ")");
+		lblEmpleadoActual = new JLabel(
+				"Empleado: " + empleadoActual.getNombreEmpleado() + " (" + empleadoActual.getCategoriaEmpleado() + ")");
 		lblEmpleadoActual.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEmpleadoActual.setForeground(new Color(91, 62, 46));
 		lblEmpleadoActual.setBounds(30, 22, 600, 30);
 		panelCabecera.add(lblEmpleadoActual);
 	}
 
+	/**
+	 * Configura los botones del menú lateral.
+	 */
 	private void configurarBotones() {
 		btnInicio = crearBotonMenu("Inicio");
 		btnInicio.setBounds(35, 115, 150, 36);
@@ -133,6 +149,9 @@ public class VentanaMenu extends JFrame {
 		panelMenu.add(btnCerrarSesion);
 	}
 
+	/**
+	 * Crea un botón estilizado para el menú lateral.
+	 */
 	private JButton crearBotonMenu(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -143,6 +162,9 @@ public class VentanaMenu extends JFrame {
 		return boton;
 	}
 
+	/**
+	 * Asocia los eventos a los botones del menú.
+	 */
 	private void agregarEventos() {
 		btnInicio.addActionListener(e -> mostrarInicio());
 		btnClientes.addActionListener(e -> mostrarPanel(new PanelClientes()));
@@ -153,27 +175,33 @@ public class VentanaMenu extends JFrame {
 		btnCerrarSesion.addActionListener(e -> cerrarSesion());
 	}
 
+	/**
+	 * Aplica permisos según la categoría del empleado.
+	 */
 	private void aplicarPermisos() {
 
-	    if (empleadoActual.esMaestro()) {
-	        return;
-	    }
-	    if (empleadoActual.esOficial()) {
-	        btnClientes.setVisible(false);
-	        btnEmpleados.setVisible(false);
-	        btnTalleres.setVisible(false);
-	        btnTrajes.setVisible(false);
-	        btnCitas.setVisible(true);
-	    }
-	    if (empleadoActual.esAprendiz()) {
-	        btnClientes.setVisible(false);
-	        btnEmpleados.setVisible(false);
-	        btnTalleres.setVisible(false);
-	        btnTrajes.setVisible(false);
-	        btnCitas.setVisible(true);
-	    }
+		if (empleadoActual.esMaestro()) {
+			return;
+		}
+		if (empleadoActual.esOficial()) {
+			btnClientes.setVisible(false);
+			btnEmpleados.setVisible(false);
+			btnTalleres.setVisible(false);
+			btnTrajes.setVisible(false);
+			btnCitas.setVisible(true);
+		}
+		if (empleadoActual.esAprendiz()) {
+			btnClientes.setVisible(false);
+			btnEmpleados.setVisible(false);
+			btnTalleres.setVisible(false);
+			btnTrajes.setVisible(false);
+			btnCitas.setVisible(true);
+		}
 	}
 
+	/**
+	 * Recoloca los botones visibles para mantener el diseño ordenado.
+	 */
 	private void recolocarBotones() {
 		btnInicio.setBounds(35, 115, 150, 36);
 
@@ -206,6 +234,9 @@ public class VentanaMenu extends JFrame {
 		btnCerrarSesion.setBounds(35, 500, 150, 36);
 	}
 
+	/**
+	 * Muestra la pantalla de bienvenida.
+	 */
 	private void mostrarInicio() {
 		panelContenido.removeAll();
 
@@ -248,6 +279,9 @@ public class VentanaMenu extends JFrame {
 		panelContenido.revalidate();
 	}
 
+	/**
+	 * Muestra un panel de gestión dentro del área de contenido.
+	 */
 	private void mostrarPanel(JPanel panel) {
 		panelContenido.removeAll();
 
@@ -258,6 +292,9 @@ public class VentanaMenu extends JFrame {
 		panelContenido.revalidate();
 	}
 
+	/**
+	 * Cierra sesión y vuelve a la ventana de login.
+	 */
 	private void cerrarSesion() {
 		VentanaLogin ventanaLogin = new VentanaLogin();
 		ventanaLogin.setVisible(true);

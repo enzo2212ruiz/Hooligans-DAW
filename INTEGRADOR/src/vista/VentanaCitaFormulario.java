@@ -19,6 +19,9 @@ import modelo.Empleado;
 import modelo.Taller;
 import modelo.Traje;
 
+/**
+ * Ventana para crear o editar una cita.
+ */
 public class VentanaCitaFormulario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +53,7 @@ public class VentanaCitaFormulario extends JFrame {
 	private Cita citaEditar;
 
 	/**
-	 * @wbp.parser.constructor
+	 * Constructor para crear una nueva cita.
 	 */
 	public VentanaCitaFormulario(PanelCitas panelCitas) {
 		this.panelCitas = panelCitas;
@@ -68,6 +71,9 @@ public class VentanaCitaFormulario extends JFrame {
 		lblTitulo.setText("Nueva cita");
 	}
 
+	/**
+	 * Constructor para editar una cita existente.
+	 */
 	public VentanaCitaFormulario(PanelCitas panelCitas, Cita citaEditar) {
 		this.panelCitas = panelCitas;
 		this.citaEditar = citaEditar;
@@ -85,6 +91,9 @@ public class VentanaCitaFormulario extends JFrame {
 		lblTitulo.setText("Editar cita");
 	}
 
+	/**
+	 * Configura la ventana principal.
+	 */
 	private void configurarVentana() {
 		setTitle("Formulario cita");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -94,6 +103,9 @@ public class VentanaCitaFormulario extends JFrame {
 		getContentPane().setLayout(null);
 	}
 
+	/**
+	 * Configura los paneles principales.
+	 */
 	private void configurarPaneles() {
 		panelFondo = new JPanel();
 		panelFondo.setLayout(null);
@@ -107,6 +119,9 @@ public class VentanaCitaFormulario extends JFrame {
 		panelFormulario.setBounds(35, 30, 455, 430);
 	}
 
+	/**
+	 * Configura los labels del formulario.
+	 */
 	private void configurarLabels() {
 		lblTitulo = new JLabel();
 		lblTitulo.setFont(new Font("Serif", Font.BOLD, 30));
@@ -144,44 +159,41 @@ public class VentanaCitaFormulario extends JFrame {
 		lblTraje.setBounds(35, 335, 120, 25);
 	}
 
+	/**
+	 * Configura los campos de texto y combos.
+	 */
 	private void configurarCampos() {
 		txtFechaCita = new JTextField();
 		txtFechaCita.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtFechaCita.setBounds(170, 80, 240, 30);
 		txtFechaCita.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
-		txtFechaCita.setColumns(10);
 
 		txtHoraCita = new JTextField();
 		txtHoraCita.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtHoraCita.setBounds(170, 130, 240, 30);
 		txtHoraCita.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
-		txtHoraCita.setColumns(10);
 
 		txtDuracionCita = new JTextField();
 		txtDuracionCita.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDuracionCita.setBounds(170, 180, 240, 30);
 		txtDuracionCita.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
-		txtDuracionCita.setColumns(10);
 
 		comboTaller = new JComboBox<Taller>();
 		comboTaller.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboTaller.setBounds(170, 235, 240, 30);
-		comboTaller.setBackground(new Color(255, 252, 247));
-		comboTaller.setForeground(new Color(55, 45, 40));
 
 		comboResponsable = new JComboBox<Empleado>();
 		comboResponsable.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboResponsable.setBounds(170, 285, 240, 30);
-		comboResponsable.setBackground(new Color(255, 252, 247));
-		comboResponsable.setForeground(new Color(55, 45, 40));
 
 		comboTraje = new JComboBox<Traje>();
 		comboTraje.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboTraje.setBounds(170, 335, 240, 30);
-		comboTraje.setBackground(new Color(255, 252, 247));
-		comboTraje.setForeground(new Color(55, 45, 40));
 	}
 
+	/**
+	 * Configura los botones del formulario.
+	 */
 	private void configurarBotones() {
 		btnGuardarCita = crearBoton("Guardar");
 		btnGuardarCita.setBounds(170, 385, 110, 35);
@@ -193,6 +205,9 @@ public class VentanaCitaFormulario extends JFrame {
 		btnCancelar.addActionListener(e -> dispose());
 	}
 
+	/**
+	 * Crea un botón estilizado.
+	 */
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -203,6 +218,9 @@ public class VentanaCitaFormulario extends JFrame {
 		return boton;
 	}
 
+	/**
+	 * Agrega todos los componentes al formulario.
+	 */
 	private void agregarComponentes() {
 		getContentPane().add(panelFondo);
 		panelFondo.add(panelFormulario);
@@ -231,6 +249,9 @@ public class VentanaCitaFormulario extends JFrame {
 		panelFormulario.add(btnCancelar);
 	}
 
+	/**
+	 * Carga los datos en los combos.
+	 */
 	private void cargarCombos() {
 		ArrayList<Taller> listaTalleres = citaControlador.obtenerTalleres();
 		ArrayList<Empleado> listaEmpleados = citaControlador.obtenerEmpleados();
@@ -249,6 +270,9 @@ public class VentanaCitaFormulario extends JFrame {
 		}
 	}
 
+	/**
+	 * Carga los datos de la cita en el formulario para edición.
+	 */
 	private void cargarDatosCita() {
 		if (citaEditar != null) {
 			txtFechaCita.setText(citaEditar.getFechaCita());
@@ -256,31 +280,28 @@ public class VentanaCitaFormulario extends JFrame {
 			txtDuracionCita.setText(String.valueOf(citaEditar.getDuracionCita()));
 
 			for (int i = 0; i < comboTaller.getItemCount(); i++) {
-				Taller taller = comboTaller.getItemAt(i);
-
-				if (taller.getIdTaller() == citaEditar.getIdTaller()) {
+				if (comboTaller.getItemAt(i).getIdTaller() == citaEditar.getIdTaller()) {
 					comboTaller.setSelectedIndex(i);
 				}
 			}
 
 			for (int i = 0; i < comboResponsable.getItemCount(); i++) {
-				Empleado empleado = comboResponsable.getItemAt(i);
-
-				if (empleado.getIdEmpleado() == citaEditar.getIdResponsable()) {
+				if (comboResponsable.getItemAt(i).getIdEmpleado() == citaEditar.getIdResponsable()) {
 					comboResponsable.setSelectedIndex(i);
 				}
 			}
 
 			for (int i = 0; i < comboTraje.getItemCount(); i++) {
-				Traje traje = comboTraje.getItemAt(i);
-
-				if (traje.getIdTraje() == citaEditar.getIdTraje()) {
+				if (comboTraje.getItemAt(i).getIdTraje() == citaEditar.getIdTraje()) {
 					comboTraje.setSelectedIndex(i);
 				}
 			}
 		}
 	}
 
+	/**
+	 * Guarda o modifica la cita según corresponda.
+	 */
 	private void guardarCita() {
 		String fechaCita = txtFechaCita.getText();
 		String horaCita = txtHoraCita.getText();
@@ -298,21 +319,11 @@ public class VentanaCitaFormulario extends JFrame {
 		boolean guardado;
 
 		if (citaEditar == null) {
-			guardado = citaControlador.guardarCita(
-					fechaCita,
-					horaCita,
-					duracionCita,
-					tallerSeleccionado.getIdTaller(),
-					responsableSeleccionado.getIdEmpleado(),
-					trajeSeleccionado.getIdTraje());
+			guardado = citaControlador.guardarCita(fechaCita, horaCita, duracionCita, tallerSeleccionado.getIdTaller(),
+					responsableSeleccionado.getIdEmpleado(), trajeSeleccionado.getIdTraje());
 		} else {
-			guardado = citaControlador.modificarCita(
-					citaEditar.getIdCita(),
-					fechaCita,
-					horaCita,
-					duracionCita,
-					tallerSeleccionado.getIdTaller(),
-					responsableSeleccionado.getIdEmpleado(),
+			guardado = citaControlador.modificarCita(citaEditar.getIdCita(), fechaCita, horaCita, duracionCita,
+					tallerSeleccionado.getIdTaller(), responsableSeleccionado.getIdEmpleado(),
 					trajeSeleccionado.getIdTraje());
 		}
 

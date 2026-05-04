@@ -14,6 +14,9 @@ import javax.swing.JTextField;
 import controlador.TallerControlador;
 import modelo.Taller;
 
+/**
+ * Ventana para crear o editar un taller.
+ */
 public class VentanaTallerFormulario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +38,9 @@ public class VentanaTallerFormulario extends JFrame {
 	private PanelTalleres panelTalleres;
 	private Taller tallerEditar;
 
+	/**
+	 * Constructor para crear un nuevo taller.
+	 */
 	public VentanaTallerFormulario(PanelTalleres panelTalleres) {
 		this.panelTalleres = panelTalleres;
 		this.tallerEditar = null;
@@ -50,6 +56,9 @@ public class VentanaTallerFormulario extends JFrame {
 		lblTitulo.setText("Nuevo taller");
 	}
 
+	/**
+	 * Constructor para editar un taller existente.
+	 */
 	public VentanaTallerFormulario(PanelTalleres panelTalleres, Taller tallerEditar) {
 		this.panelTalleres = panelTalleres;
 		this.tallerEditar = tallerEditar;
@@ -66,6 +75,9 @@ public class VentanaTallerFormulario extends JFrame {
 		lblTitulo.setText("Editar taller");
 	}
 
+	/**
+	 * Configura la ventana principal.
+	 */
 	private void configurarVentana() {
 		setTitle("Formulario taller");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -75,6 +87,9 @@ public class VentanaTallerFormulario extends JFrame {
 		getContentPane().setLayout(null);
 	}
 
+	/**
+	 * Configura los paneles principales.
+	 */
 	private void configurarPaneles() {
 		panelFondo = new JPanel();
 		panelFondo.setLayout(null);
@@ -88,6 +103,9 @@ public class VentanaTallerFormulario extends JFrame {
 		panelFormulario.setBounds(35, 30, 385, 285);
 	}
 
+	/**
+	 * Configura los labels del formulario.
+	 */
 	private void configurarLabels() {
 		lblTitulo = new JLabel();
 		lblTitulo.setFont(new Font("Serif", Font.BOLD, 30));
@@ -105,20 +123,24 @@ public class VentanaTallerFormulario extends JFrame {
 		lblTipoTaller.setBounds(35, 145, 120, 25);
 	}
 
+	/**
+	 * Configura los campos de texto.
+	 */
 	private void configurarCamposTexto() {
 		txtNombreTaller = new JTextField();
 		txtNombreTaller.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNombreTaller.setBounds(150, 85, 195, 30);
 		txtNombreTaller.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
-		txtNombreTaller.setColumns(10);
 
 		txtTipoTaller = new JTextField();
 		txtTipoTaller.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtTipoTaller.setBounds(150, 145, 195, 30);
 		txtTipoTaller.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
-		txtTipoTaller.setColumns(10);
 	}
 
+	/**
+	 * Configura los botones del formulario.
+	 */
 	private void configurarBotones() {
 		btnGuardarTaller = crearBoton("Guardar");
 		btnGuardarTaller.setBounds(115, 220, 105, 35);
@@ -130,6 +152,9 @@ public class VentanaTallerFormulario extends JFrame {
 		btnCancelar.addActionListener(e -> dispose());
 	}
 
+	/**
+	 * Crea un botón estilizado.
+	 */
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -140,6 +165,9 @@ public class VentanaTallerFormulario extends JFrame {
 		return boton;
 	}
 
+	/**
+	 * Agrega todos los componentes al formulario.
+	 */
 	private void agregarComponentes() {
 		getContentPane().add(panelFondo);
 		panelFondo.add(panelFormulario);
@@ -153,6 +181,9 @@ public class VentanaTallerFormulario extends JFrame {
 		panelFormulario.add(btnCancelar);
 	}
 
+	/**
+	 * Carga los datos del taller en el formulario para edición.
+	 */
 	private void cargarDatosTaller() {
 		if (tallerEditar != null) {
 			txtNombreTaller.setText(tallerEditar.getNombreTaller());
@@ -160,6 +191,9 @@ public class VentanaTallerFormulario extends JFrame {
 		}
 	}
 
+	/**
+	 * Guarda o modifica el taller según corresponda.
+	 */
 	private void guardarTaller() {
 		String nombreTaller = txtNombreTaller.getText();
 		String tipoTaller = txtTipoTaller.getText();
@@ -169,10 +203,7 @@ public class VentanaTallerFormulario extends JFrame {
 		if (tallerEditar == null) {
 			guardado = tallerControlador.guardarTaller(nombreTaller, tipoTaller);
 		} else {
-			guardado = tallerControlador.modificarTaller(
-					tallerEditar.getIdTaller(),
-					nombreTaller,
-					tipoTaller);
+			guardado = tallerControlador.modificarTaller(tallerEditar.getIdTaller(), nombreTaller, tipoTaller);
 		}
 
 		if (guardado) {

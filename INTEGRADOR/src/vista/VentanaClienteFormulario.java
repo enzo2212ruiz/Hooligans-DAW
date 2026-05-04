@@ -14,6 +14,9 @@ import javax.swing.JTextField;
 import controlador.ClienteControlador;
 import modelo.Cliente;
 
+/**
+ * Ventana para crear o editar un cliente.
+ */
 public class VentanaClienteFormulario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +38,9 @@ public class VentanaClienteFormulario extends JFrame {
 	private PanelClientes panelClientes;
 	private Cliente clienteEditar;
 
+	/**
+	 * Constructor para crear un nuevo cliente.
+	 */
 	public VentanaClienteFormulario(PanelClientes panelClientes) {
 		this.panelClientes = panelClientes;
 		this.clienteEditar = null;
@@ -50,6 +56,9 @@ public class VentanaClienteFormulario extends JFrame {
 		lblTitulo.setText("Nuevo cliente");
 	}
 
+	/**
+	 * Constructor para editar un cliente existente.
+	 */
 	public VentanaClienteFormulario(PanelClientes panelClientes, Cliente clienteEditar) {
 		this.panelClientes = panelClientes;
 		this.clienteEditar = clienteEditar;
@@ -66,6 +75,9 @@ public class VentanaClienteFormulario extends JFrame {
 		lblTitulo.setText("Editar cliente");
 	}
 
+	/**
+	 * Configura la ventana principal.
+	 */
 	private void configurarVentana() {
 		setTitle("Formulario cliente");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -75,6 +87,9 @@ public class VentanaClienteFormulario extends JFrame {
 		getContentPane().setLayout(null);
 	}
 
+	/**
+	 * Configura los paneles principales.
+	 */
 	private void configurarPaneles() {
 		panelFondo = new JPanel();
 		panelFondo.setLayout(null);
@@ -88,6 +103,9 @@ public class VentanaClienteFormulario extends JFrame {
 		panelFormulario.setBounds(35, 30, 385, 285);
 	}
 
+	/**
+	 * Configura los labels del formulario.
+	 */
 	private void configurarLabels() {
 		lblTitulo = new JLabel();
 		lblTitulo.setFont(new Font("Serif", Font.BOLD, 30));
@@ -105,20 +123,24 @@ public class VentanaClienteFormulario extends JFrame {
 		lblSuperpoderCliente.setBounds(35, 145, 120, 25);
 	}
 
+	/**
+	 * Configura los campos de texto.
+	 */
 	private void configurarCamposTexto() {
 		txtNombreCliente = new JTextField();
 		txtNombreCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNombreCliente.setBounds(150, 85, 195, 30);
 		txtNombreCliente.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
-		txtNombreCliente.setColumns(10);
 
 		txtSuperpoderCliente = new JTextField();
 		txtSuperpoderCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtSuperpoderCliente.setBounds(150, 145, 195, 30);
 		txtSuperpoderCliente.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
-		txtSuperpoderCliente.setColumns(10);
 	}
 
+	/**
+	 * Configura los botones del formulario.
+	 */
 	private void configurarBotones() {
 		btnGuardarCliente = crearBoton("Guardar");
 		btnGuardarCliente.setBounds(115, 220, 105, 35);
@@ -130,6 +152,9 @@ public class VentanaClienteFormulario extends JFrame {
 		btnCancelar.addActionListener(e -> dispose());
 	}
 
+	/**
+	 * Crea un botón estilizado.
+	 */
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -140,6 +165,9 @@ public class VentanaClienteFormulario extends JFrame {
 		return boton;
 	}
 
+	/**
+	 * Agrega todos los componentes al formulario.
+	 */
 	private void agregarComponentes() {
 		getContentPane().add(panelFondo);
 		panelFondo.add(panelFormulario);
@@ -153,6 +181,9 @@ public class VentanaClienteFormulario extends JFrame {
 		panelFormulario.add(btnCancelar);
 	}
 
+	/**
+	 * Carga los datos del cliente en el formulario para edición.
+	 */
 	private void cargarDatosCliente() {
 		if (clienteEditar != null) {
 			txtNombreCliente.setText(clienteEditar.getNombreCliente());
@@ -160,6 +191,9 @@ public class VentanaClienteFormulario extends JFrame {
 		}
 	}
 
+	/**
+	 * Guarda o modifica el cliente según corresponda.
+	 */
 	private void guardarCliente() {
 		String nombreCliente = txtNombreCliente.getText();
 		String superpoderCliente = txtSuperpoderCliente.getText();
@@ -169,9 +203,7 @@ public class VentanaClienteFormulario extends JFrame {
 		if (clienteEditar == null) {
 			guardado = clienteControlador.guardarCliente(nombreCliente, superpoderCliente);
 		} else {
-			guardado = clienteControlador.modificarCliente(
-					clienteEditar.getIdCliente(),
-					nombreCliente,
+			guardado = clienteControlador.modificarCliente(clienteEditar.getIdCliente(), nombreCliente,
 					superpoderCliente);
 		}
 

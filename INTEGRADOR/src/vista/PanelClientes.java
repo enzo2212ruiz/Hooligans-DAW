@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import controlador.ClienteControlador;
 import modelo.Cliente;
 
+/**
+ * Panel encargado de gestionar la visualización y administración de clientes.
+ */
 public class PanelClientes extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +38,9 @@ public class PanelClientes extends JPanel {
 
 	private ClienteControlador clienteControlador;
 
+	/**
+	 * Construye el panel de gestión de clientes.
+	 */
 	public PanelClientes() {
 		clienteControlador = new ClienteControlador();
 
@@ -61,7 +67,6 @@ public class PanelClientes extends JPanel {
 		btnEliminarCliente.setBounds(335, 85, 135, 38);
 		add(btnEliminarCliente);
 
-
 		panelTabla = new JPanel();
 		panelTabla.setLayout(null);
 		panelTabla.setBackground(new Color(255, 252, 247));
@@ -87,7 +92,7 @@ public class PanelClientes extends JPanel {
 		tablaClientes.getColumnModel().getColumn(0).setMinWidth(0);
 		tablaClientes.getColumnModel().getColumn(0).setMaxWidth(0);
 		tablaClientes.getColumnModel().getColumn(0).setPreferredWidth(0);
-		
+
 		scrollClientes = new JScrollPane(tablaClientes);
 		scrollClientes.setBounds(15, 15, 660, 270);
 		scrollClientes.setBorder(BorderFactory.createLineBorder(new Color(220, 200, 180)));
@@ -101,6 +106,9 @@ public class PanelClientes extends JPanel {
 		cargarClientes();
 	}
 
+	/**
+	 * Crea un botón estilizado.
+	 */
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -111,22 +119,24 @@ public class PanelClientes extends JPanel {
 		return boton;
 	}
 
+	/**
+	 * Carga los clientes en la tabla.
+	 */
 	private void cargarClientes() {
 		modeloClientes.setRowCount(0);
 
 		ArrayList<Cliente> listaClientes = clienteControlador.obtenerClientes();
 
 		for (Cliente cliente : listaClientes) {
-			Object[] fila = {
-					cliente.getIdCliente(),
-					cliente.getNombreCliente(),
-					cliente.getSuperpoderCliente()
-			};
+			Object[] fila = { cliente.getIdCliente(), cliente.getNombreCliente(), cliente.getSuperpoderCliente() };
 
 			modeloClientes.addRow(fila);
 		}
 	}
 
+	/**
+	 * Obtiene el cliente seleccionado en la tabla.
+	 */
 	private Cliente obtenerClienteSeleccionado() {
 		int filaSeleccionada = tablaClientes.getSelectedRow();
 
@@ -147,11 +157,17 @@ public class PanelClientes extends JPanel {
 		return cliente;
 	}
 
+	/**
+	 * Abre el formulario para crear un nuevo cliente.
+	 */
 	private void abrirFormularioNuevoCliente() {
 		VentanaClienteFormulario ventanaClienteFormulario = new VentanaClienteFormulario(this);
 		ventanaClienteFormulario.setVisible(true);
 	}
 
+	/**
+	 * Abre el formulario para editar un cliente seleccionado.
+	 */
 	private void abrirFormularioEditarCliente() {
 		Cliente clienteSeleccionado = obtenerClienteSeleccionado();
 
@@ -161,14 +177,15 @@ public class PanelClientes extends JPanel {
 		}
 	}
 
+	/**
+	 * Elimina el cliente seleccionado previa confirmación.
+	 */
 	private void eliminarCliente() {
 		Cliente clienteSeleccionado = obtenerClienteSeleccionado();
 
 		if (clienteSeleccionado != null) {
-			int opcion = JOptionPane.showConfirmDialog(this,
-					"¿Seguro que quieres eliminar este cliente?",
-					"Confirmar eliminación",
-					JOptionPane.YES_NO_OPTION);
+			int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro que quieres eliminar este cliente?",
+					"Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
 			if (opcion == JOptionPane.YES_OPTION) {
 				boolean eliminado = clienteControlador.eliminarCliente(clienteSeleccionado.getIdCliente());
@@ -183,6 +200,9 @@ public class PanelClientes extends JPanel {
 		}
 	}
 
+	/**
+	 * Refresca la tabla recargando los clientes.
+	 */
 	public void refrescarTablaClientes() {
 		cargarClientes();
 	}
