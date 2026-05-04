@@ -32,7 +32,6 @@ public class PanelClientes extends JPanel {
 	private JButton btnNuevoCliente;
 	private JButton btnEditarCliente;
 	private JButton btnEliminarCliente;
-	private JButton btnRefrescarClientes;
 
 	private ClienteControlador clienteControlador;
 
@@ -62,9 +61,6 @@ public class PanelClientes extends JPanel {
 		btnEliminarCliente.setBounds(335, 85, 135, 38);
 		add(btnEliminarCliente);
 
-		btnRefrescarClientes = crearBoton("Refrescar");
-		btnRefrescarClientes.setBounds(485, 85, 135, 38);
-		add(btnRefrescarClientes);
 
 		panelTabla = new JPanel();
 		panelTabla.setLayout(null);
@@ -101,7 +97,6 @@ public class PanelClientes extends JPanel {
 		btnNuevoCliente.addActionListener(e -> abrirFormularioNuevoCliente());
 		btnEditarCliente.addActionListener(e -> abrirFormularioEditarCliente());
 		btnEliminarCliente.addActionListener(e -> eliminarCliente());
-		btnRefrescarClientes.addActionListener(e -> cargarClientes());
 
 		cargarClientes();
 	}

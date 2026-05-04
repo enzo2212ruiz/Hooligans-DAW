@@ -32,7 +32,6 @@ public class PanelTrajes extends JPanel {
 	private JButton btnNuevoTraje;
 	private JButton btnEditarTraje;
 	private JButton btnEliminarTraje;
-	private JButton btnRefrescarTrajes;
 
 	private TrajeControlador trajeControlador;
 
@@ -61,11 +60,7 @@ public class PanelTrajes extends JPanel {
 		btnEliminarTraje = crearBoton("Eliminar");
 		btnEliminarTraje.setBounds(335, 85, 135, 38);
 		add(btnEliminarTraje);
-
-		btnRefrescarTrajes = crearBoton("Refrescar");
-		btnRefrescarTrajes.setBounds(485, 85, 135, 38);
-		add(btnRefrescarTrajes);
-
+		
 		panelTabla = new JPanel();
 		panelTabla.setLayout(null);
 		panelTabla.setBackground(new Color(255, 252, 247));
@@ -107,7 +102,6 @@ public class PanelTrajes extends JPanel {
 		btnNuevoTraje.addActionListener(e -> abrirFormularioNuevoTraje());
 		btnEditarTraje.addActionListener(e -> abrirFormularioEditarTraje());
 		btnEliminarTraje.addActionListener(e -> eliminarTraje());
-		btnRefrescarTrajes.addActionListener(e -> cargarTrajes());
 
 		cargarTrajes();
 	}

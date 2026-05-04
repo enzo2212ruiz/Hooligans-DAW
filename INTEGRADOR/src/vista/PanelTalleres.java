@@ -32,7 +32,6 @@ public class PanelTalleres extends JPanel {
 	private JButton btnNuevoTaller;
 	private JButton btnEditarTaller;
 	private JButton btnEliminarTaller;
-	private JButton btnRefrescarTalleres;
 
 	private TallerControlador tallerControlador;
 
@@ -61,10 +60,6 @@ public class PanelTalleres extends JPanel {
 		btnEliminarTaller = crearBoton("Eliminar");
 		btnEliminarTaller.setBounds(335, 85, 135, 38);
 		add(btnEliminarTaller);
-
-		btnRefrescarTalleres = crearBoton("Refrescar");
-		btnRefrescarTalleres.setBounds(485, 85, 135, 38);
-		add(btnRefrescarTalleres);
 
 		panelTabla = new JPanel();
 		panelTabla.setLayout(null);
@@ -101,7 +96,6 @@ public class PanelTalleres extends JPanel {
 		btnNuevoTaller.addActionListener(e -> abrirFormularioNuevoTaller());
 		btnEditarTaller.addActionListener(e -> abrirFormularioEditarTaller());
 		btnEliminarTaller.addActionListener(e -> eliminarTaller());
-		btnRefrescarTalleres.addActionListener(e -> cargarTalleres());
 
 		cargarTalleres();
 	}

@@ -32,7 +32,6 @@ public class PanelCitas extends JPanel {
 	private JButton btnNuevaCita;
 	private JButton btnEditarCita;
 	private JButton btnEliminarCita;
-	private JButton btnRefrescarCitas;
 
 	private CitaControlador citaControlador;
 
@@ -62,9 +61,6 @@ public class PanelCitas extends JPanel {
 		btnEliminarCita.setBounds(335, 85, 135, 38);
 		add(btnEliminarCita);
 
-		btnRefrescarCitas = crearBoton("Refrescar");
-		btnRefrescarCitas.setBounds(485, 85, 135, 38);
-		add(btnRefrescarCitas);
 
 		panelTabla = new JPanel();
 		panelTabla.setLayout(null);
@@ -120,7 +116,6 @@ public class PanelCitas extends JPanel {
 		btnNuevaCita.addActionListener(e -> abrirFormularioNuevaCita());
 		btnEditarCita.addActionListener(e -> abrirFormularioEditarCita());
 		btnEliminarCita.addActionListener(e -> eliminarCita());
-		btnRefrescarCitas.addActionListener(e -> cargarCitas());
 
 		cargarCitas();
 	}
