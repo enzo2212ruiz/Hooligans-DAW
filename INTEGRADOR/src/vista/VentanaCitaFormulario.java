@@ -47,6 +47,7 @@ public class VentanaCitaFormulario extends JFrame {
 
 	private JButton btnGuardarCita;
 	private JButton btnCancelar;
+	private JButton btnAprendices;
 
 	private CitaControlador citaControlador;
 	private PanelCitas panelCitas;
@@ -200,9 +201,13 @@ public class VentanaCitaFormulario extends JFrame {
 
 		btnCancelar = crearBoton("Cancelar");
 		btnCancelar.setBounds(300, 385, 110, 35);
+		
+		btnAprendices = crearBoton("Aprendices");
+		btnAprendices.setBounds(35, 385, 110, 35);
 
 		btnGuardarCita.addActionListener(e -> guardarCita());
 		btnCancelar.addActionListener(e -> dispose());
+		btnAprendices.addActionListener(e -> abrirFormularioAprendices());
 	}
 
 	/**
@@ -247,6 +252,7 @@ public class VentanaCitaFormulario extends JFrame {
 
 		panelFormulario.add(btnGuardarCita);
 		panelFormulario.add(btnCancelar);
+		panelFormulario.add(btnAprendices);
 	}
 
 	/**
@@ -335,4 +341,10 @@ public class VentanaCitaFormulario extends JFrame {
 			JOptionPane.showMessageDialog(this, "No se ha podido guardar la cita. Revisa los datos.");
 		}
 	}
+
+	private void abrirFormularioAprendices() {
+	    VentanaAprendicesFormulario ventana = new VentanaAprendicesFormulario(this);
+	    ventana.setVisible(true);
+	}
 }
+
