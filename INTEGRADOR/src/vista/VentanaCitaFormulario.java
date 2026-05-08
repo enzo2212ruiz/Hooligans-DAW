@@ -19,9 +19,6 @@ import modelo.Empleado;
 import modelo.Taller;
 import modelo.Traje;
 
-/**
- * Ventana para crear o editar una cita.
- */
 public class VentanaCitaFormulario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -53,9 +50,9 @@ public class VentanaCitaFormulario extends JFrame {
 	private PanelCitas panelCitas;
 	private Cita citaEditar;
 
-	/**
-	 * Constructor para crear una nueva cita.
-	 */
+	private int idAprendiz1 = 0;
+	private int idAprendiz2 = 0;
+
 	public VentanaCitaFormulario(PanelCitas panelCitas) {
 		this.panelCitas = panelCitas;
 		this.citaEditar = null;
@@ -72,9 +69,6 @@ public class VentanaCitaFormulario extends JFrame {
 		lblTitulo.setText("Nueva cita");
 	}
 
-	/**
-	 * Constructor para editar una cita existente.
-	 */
 	public VentanaCitaFormulario(PanelCitas panelCitas, Cita citaEditar) {
 		this.panelCitas = panelCitas;
 		this.citaEditar = citaEditar;
@@ -92,9 +86,6 @@ public class VentanaCitaFormulario extends JFrame {
 		lblTitulo.setText("Editar cita");
 	}
 
-	/**
-	 * Configura la ventana principal.
-	 */
 	private void configurarVentana() {
 		setTitle("Formulario cita");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -104,9 +95,6 @@ public class VentanaCitaFormulario extends JFrame {
 		getContentPane().setLayout(null);
 	}
 
-	/**
-	 * Configura los paneles principales.
-	 */
 	private void configurarPaneles() {
 		panelFondo = new JPanel();
 		panelFondo.setLayout(null);
@@ -120,9 +108,6 @@ public class VentanaCitaFormulario extends JFrame {
 		panelFormulario.setBounds(35, 30, 455, 430);
 	}
 
-	/**
-	 * Configura los labels del formulario.
-	 */
 	private void configurarLabels() {
 		lblTitulo = new JLabel();
 		lblTitulo.setFont(new Font("Serif", Font.BOLD, 30));
@@ -160,9 +145,6 @@ public class VentanaCitaFormulario extends JFrame {
 		lblTraje.setBounds(35, 335, 120, 25);
 	}
 
-	/**
-	 * Configura los campos de texto y combos.
-	 */
 	private void configurarCampos() {
 		txtFechaCita = new JTextField();
 		txtFechaCita.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -192,16 +174,13 @@ public class VentanaCitaFormulario extends JFrame {
 		comboTraje.setBounds(170, 335, 240, 30);
 	}
 
-	/**
-	 * Configura los botones del formulario.
-	 */
 	private void configurarBotones() {
 		btnGuardarCita = crearBoton("Guardar");
 		btnGuardarCita.setBounds(170, 385, 110, 35);
 
 		btnCancelar = crearBoton("Cancelar");
 		btnCancelar.setBounds(300, 385, 110, 35);
-		
+
 		btnAprendices = crearBoton("Aprendices");
 		btnAprendices.setBounds(35, 385, 110, 35);
 
@@ -210,9 +189,6 @@ public class VentanaCitaFormulario extends JFrame {
 		btnAprendices.addActionListener(e -> abrirFormularioAprendices());
 	}
 
-	/**
-	 * Crea un botón estilizado.
-	 */
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -223,9 +199,6 @@ public class VentanaCitaFormulario extends JFrame {
 		return boton;
 	}
 
-	/**
-	 * Agrega todos los componentes al formulario.
-	 */
 	private void agregarComponentes() {
 		getContentPane().add(panelFondo);
 		panelFondo.add(panelFormulario);
@@ -255,12 +228,9 @@ public class VentanaCitaFormulario extends JFrame {
 		panelFormulario.add(btnAprendices);
 	}
 
-	/**
-	 * Carga los datos en los combos.
-	 */
 	private void cargarCombos() {
 		ArrayList<Taller> listaTalleres = citaControlador.obtenerTalleres();
-		ArrayList<Empleado> listaEmpleados = citaControlador.obtenerEmpleados();
+		ArrayList<Empleado> listaEmpleados = citaControlador.obtenerResponsables();
 		ArrayList<Traje> listaTrajes = citaControlador.obtenerTrajes();
 
 		for (Taller taller : listaTalleres) {
@@ -276,14 +246,14 @@ public class VentanaCitaFormulario extends JFrame {
 		}
 	}
 
-	/**
-	 * Carga los datos de la cita en el formulario para edición.
-	 */
 	private void cargarDatosCita() {
 		if (citaEditar != null) {
 			txtFechaCita.setText(citaEditar.getFechaCita());
 			txtHoraCita.setText(citaEditar.getHoraCita());
 			txtDuracionCita.setText(String.valueOf(citaEditar.getDuracionCita()));
+
+			idAprendiz1 = citaEditar.getIdAprendiz1();
+			idAprendiz2 = citaEditar.getIdAprendiz2();
 
 			for (int i = 0; i < comboTaller.getItemCount(); i++) {
 				if (comboTaller.getItemAt(i).getIdTaller() == citaEditar.getIdTaller()) {
@@ -305,9 +275,6 @@ public class VentanaCitaFormulario extends JFrame {
 		}
 	}
 
-	/**
-	 * Guarda o modifica la cita según corresponda.
-	 */
 	private void guardarCita() {
 		String fechaCita = txtFechaCita.getText();
 		String horaCita = txtHoraCita.getText();
@@ -325,12 +292,28 @@ public class VentanaCitaFormulario extends JFrame {
 		boolean guardado;
 
 		if (citaEditar == null) {
-			guardado = citaControlador.guardarCita(fechaCita, horaCita, duracionCita, tallerSeleccionado.getIdTaller(),
-					responsableSeleccionado.getIdEmpleado(), trajeSeleccionado.getIdTraje());
+			guardado = citaControlador.guardarCita(
+					fechaCita,
+					horaCita,
+					duracionCita,
+					tallerSeleccionado.getIdTaller(),
+					responsableSeleccionado.getIdEmpleado(),
+					trajeSeleccionado.getIdTraje(),
+					idAprendiz1,
+					idAprendiz2
+			);
 		} else {
-			guardado = citaControlador.modificarCita(citaEditar.getIdCita(), fechaCita, horaCita, duracionCita,
-					tallerSeleccionado.getIdTaller(), responsableSeleccionado.getIdEmpleado(),
-					trajeSeleccionado.getIdTraje());
+			guardado = citaControlador.modificarCita(
+					citaEditar.getIdCita(),
+					fechaCita,
+					horaCita,
+					duracionCita,
+					tallerSeleccionado.getIdTaller(),
+					responsableSeleccionado.getIdEmpleado(),
+					trajeSeleccionado.getIdTraje(),
+					idAprendiz1,
+					idAprendiz2
+			);
 		}
 
 		if (guardado) {
@@ -343,8 +326,31 @@ public class VentanaCitaFormulario extends JFrame {
 	}
 
 	private void abrirFormularioAprendices() {
-	    VentanaAprendicesFormulario ventana = new VentanaAprendicesFormulario(this);
-	    ventana.setVisible(true);
+		VentanaAprendicesFormulario ventana = new VentanaAprendicesFormulario(this);
+		ventana.setVisible(true);
+	}
+
+	public void setAprendices(Empleado aprendiz1, Empleado aprendiz2) {
+		if (aprendiz1 == null) {
+			idAprendiz1 = 0;
+		} else {
+			idAprendiz1 = aprendiz1.getIdEmpleado();
+		}
+
+		if (aprendiz2 == null) {
+			idAprendiz2 = 0;
+		} else {
+			idAprendiz2 = aprendiz2.getIdEmpleado();
+		}
+
+		JOptionPane.showMessageDialog(this, "Aprendices seleccionados correctamente.");
+	}
+
+	public int getIdAprendiz1() {
+		return idAprendiz1;
+	}
+
+	public int getIdAprendiz2() {
+		return idAprendiz2;
 	}
 }
-

@@ -11,10 +11,6 @@ import modelo.TallerB;
 import modelo.Traje;
 import modelo.TrajeB;
 
-/**
- * Controlador que gestiona las operaciones de las citas: obtener, guardar,
- * modificar y eliminar.
- */
 public class CitaControlador {
 
 	private CitaB citaB;
@@ -22,9 +18,6 @@ public class CitaControlador {
 	private EmpleadoB empleadoB;
 	private TrajeB trajeB;
 
-	/**
-	 * Inicializa los objetos necesarios para acceder a los datos.
-	 */
 	public CitaControlador() {
 		citaB = new CitaB();
 		tallerB = new TallerB();
@@ -32,41 +25,48 @@ public class CitaControlador {
 		trajeB = new TrajeB();
 	}
 
-	/**
-	 * Obtiene todas las citas.
-	 */
 	public ArrayList<Cita> obtenerCitas() {
 		return citaB.obtenerCitas();
 	}
 
-	/**
-	 * Obtiene todos los talleres.
-	 */
 	public ArrayList<Taller> obtenerTalleres() {
 		return tallerB.obtenerTalleres();
 	}
 
-	/**
-	 * Obtiene todos los empleados.
-	 */
 	public ArrayList<Empleado> obtenerEmpleados() {
 		return empleadoB.obtenerEmpleados();
 	}
 
-	/**
-	 * Obtiene todos los trajes.
-	 */
+	public ArrayList<Empleado> obtenerResponsables() {
+		ArrayList<Empleado> responsables = new ArrayList<Empleado>();
+
+		for (Empleado empleado : empleadoB.obtenerEmpleados()) {
+			if (empleado.esMaestro() || empleado.esOficial()) {
+				responsables.add(empleado);
+			}
+		}
+
+		return responsables;
+	}
+
+	public ArrayList<Empleado> obtenerAprendices() {
+		ArrayList<Empleado> aprendices = new ArrayList<Empleado>();
+
+		for (Empleado empleado : empleadoB.obtenerEmpleados()) {
+			if (empleado.esAprendiz()) {
+				aprendices.add(empleado);
+			}
+		}
+
+		return aprendices;
+	}
+
 	public ArrayList<Traje> obtenerTrajes() {
 		return trajeB.obtenerTrajes();
 	}
 
-	/**
-	 * Guarda una nueva cita si los datos son válidos.
-	 * 
-	 * @return true si se guardó correctamente
-	 */
 	public boolean guardarCita(String fechaCita, String horaCita, String duracionCita, int idTaller, int idResponsable,
-			int idTraje) {
+			int idTraje, int idAprendiz1, int idAprendiz2) {
 
 		if (fechaCita == null || fechaCita.trim().isEmpty())
 			return false;
@@ -76,8 +76,11 @@ public class CitaControlador {
 			return false;
 		if (idTaller <= 0 || idResponsable <= 0 || idTraje <= 0)
 			return false;
+		if (idAprendiz1 > 0 && idAprendiz1 == idAprendiz2)
+			return false;
 
 		int duracion;
+
 		try {
 			duracion = Integer.parseInt(duracionCita);
 		} catch (NumberFormatException e) {
@@ -94,17 +97,14 @@ public class CitaControlador {
 		cita.setIdTaller(idTaller);
 		cita.setIdResponsable(idResponsable);
 		cita.setIdTraje(idTraje);
+		cita.setIdAprendiz1(idAprendiz1);
+		cita.setIdAprendiz2(idAprendiz2);
 
 		return citaB.insertarCita(cita);
 	}
 
-	/**
-	 * Modifica una cita existente si los datos son válidos.
-	 * 
-	 * @return true si se modificó correctamente
-	 */
 	public boolean modificarCita(int idCita, String fechaCita, String horaCita, String duracionCita, int idTaller,
-			int idResponsable, int idTraje) {
+			int idResponsable, int idTraje, int idAprendiz1, int idAprendiz2) {
 
 		if (idCita <= 0)
 			return false;
@@ -116,8 +116,11 @@ public class CitaControlador {
 			return false;
 		if (idTaller <= 0 || idResponsable <= 0 || idTraje <= 0)
 			return false;
+		if (idAprendiz1 > 0 && idAprendiz1 == idAprendiz2)
+			return false;
 
 		int duracion;
+
 		try {
 			duracion = Integer.parseInt(duracionCita);
 		} catch (NumberFormatException e) {
@@ -135,17 +138,13 @@ public class CitaControlador {
 		cita.setIdTaller(idTaller);
 		cita.setIdResponsable(idResponsable);
 		cita.setIdTraje(idTraje);
+		cita.setIdAprendiz1(idAprendiz1);
+		cita.setIdAprendiz2(idAprendiz2);
 
 		return citaB.modificarCita(cita);
 	}
 
-	/**
-	 * Elimina una cita por su ID.
-	 * 
-	 * @return true si se eliminó correctamente
-	 */
 	public boolean eliminarCita(int idCita) {
-
 		if (idCita <= 0)
 			return false;
 

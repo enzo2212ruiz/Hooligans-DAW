@@ -11,7 +11,7 @@ public class ConexionBD {
 
 	private static final String URL_BD = "jdbc:mysql://localhost/ednamoda";
 	private static final String USUARIO_BD = "root";
-	private static final String PASSWORD_BD = "12345678";
+	private static final String PASSWORD_BD = "root";
 
 	/**
 	 * Establece y devuelve una conexión con la base de datos.

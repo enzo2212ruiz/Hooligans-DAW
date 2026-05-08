@@ -41,9 +41,6 @@ public class PanelCitas extends JPanel {
 
 	private Empleado empleadoActual;
 
-	/**
-	 * Construye el panel de citas para el empleado actual.
-	 */
 	public PanelCitas(Empleado empleadoActual) {
 		this.empleadoActual = empleadoActual;
 		citaControlador = new CitaControlador();
@@ -89,6 +86,8 @@ public class PanelCitas extends JPanel {
 		modeloCitas.addColumn("Responsable");
 		modeloCitas.addColumn("ID Traje");
 		modeloCitas.addColumn("Traje");
+		modeloCitas.addColumn("ID Aprendiz 1");
+		modeloCitas.addColumn("ID Aprendiz 2");
 
 		tablaCitas = new JTable(modeloCitas);
 		tablaCitas.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -100,21 +99,12 @@ public class PanelCitas extends JPanel {
 		tablaCitas.getTableHeader().setForeground(new Color(91, 62, 46));
 		tablaCitas.getTableHeader().setBackground(new Color(230, 215, 200));
 
-		tablaCitas.getColumnModel().getColumn(0).setMinWidth(0);
-		tablaCitas.getColumnModel().getColumn(0).setMaxWidth(0);
-		tablaCitas.getColumnModel().getColumn(0).setPreferredWidth(0);
-
-		tablaCitas.getColumnModel().getColumn(4).setMinWidth(0);
-		tablaCitas.getColumnModel().getColumn(4).setMaxWidth(0);
-		tablaCitas.getColumnModel().getColumn(4).setPreferredWidth(0);
-
-		tablaCitas.getColumnModel().getColumn(6).setMinWidth(0);
-		tablaCitas.getColumnModel().getColumn(6).setMaxWidth(0);
-		tablaCitas.getColumnModel().getColumn(6).setPreferredWidth(0);
-
-		tablaCitas.getColumnModel().getColumn(8).setMinWidth(0);
-		tablaCitas.getColumnModel().getColumn(8).setMaxWidth(0);
-		tablaCitas.getColumnModel().getColumn(8).setPreferredWidth(0);
+		ocultarColumna(0);
+		ocultarColumna(4);
+		ocultarColumna(6);
+		ocultarColumna(8);
+		ocultarColumna(10);
+		ocultarColumna(11);
 
 		scrollCitas = new JScrollPane(tablaCitas);
 		scrollCitas.setBounds(15, 15, 660, 270);
@@ -125,13 +115,11 @@ public class PanelCitas extends JPanel {
 		btnNuevaCita.addActionListener(e -> abrirFormularioNuevaCita());
 		btnEditarCita.addActionListener(e -> abrirFormularioEditarCita());
 		btnEliminarCita.addActionListener(e -> eliminarCita());
+
 		aplicarPermisos();
 		cargarCitas();
 	}
 
-	/**
-	 * Crea un botón estilizado.
-	 */
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
 		boton.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -142,30 +130,45 @@ public class PanelCitas extends JPanel {
 		return boton;
 	}
 
-	/**
-	 * Carga las citas en la tabla aplicando filtros según el empleado.
-	 */
+	private void ocultarColumna(int numeroColumna) {
+		tablaCitas.getColumnModel().getColumn(numeroColumna).setMinWidth(0);
+		tablaCitas.getColumnModel().getColumn(numeroColumna).setMaxWidth(0);
+		tablaCitas.getColumnModel().getColumn(numeroColumna).setPreferredWidth(0);
+	}
+
 	private void cargarCitas() {
 		modeloCitas.setRowCount(0);
 
 		ArrayList<Cita> listaCitas = citaControlador.obtenerCitas();
 
 		for (Cita cita : listaCitas) {
-			if (empleadoActual.esAprendiz() && cita.getIdResponsable() != empleadoActual.getIdEmpleado()) {
+
+			if (empleadoActual.esAprendiz()
+					&& cita.getIdResponsable() != empleadoActual.getIdEmpleado()
+					&& cita.getIdAprendiz1() != empleadoActual.getIdEmpleado()
+					&& cita.getIdAprendiz2() != empleadoActual.getIdEmpleado()) {
 				continue;
 			}
 
-			Object[] fila = { cita.getIdCita(), cita.getFechaCita(), cita.getHoraCita(), cita.getDuracionCita(),
-					cita.getIdTaller(), cita.getNombreTaller(), cita.getIdResponsable(), cita.getNombreResponsable(),
-					cita.getIdTraje(), cita.getNombreTraje() };
+			Object[] fila = {
+					cita.getIdCita(),
+					cita.getFechaCita(),
+					cita.getHoraCita(),
+					cita.getDuracionCita(),
+					cita.getIdTaller(),
+					cita.getNombreTaller(),
+					cita.getIdResponsable(),
+					cita.getNombreResponsable(),
+					cita.getIdTraje(),
+					cita.getNombreTraje(),
+					cita.getIdAprendiz1(),
+					cita.getIdAprendiz2()
+			};
 
 			modeloCitas.addRow(fila);
 		}
 	}
 
-	/**
-	 * Aplica permisos según la categoría del empleado.
-	 */
 	private void aplicarPermisos() {
 
 		if (empleadoActual.esOficial()) {
@@ -179,9 +182,6 @@ public class PanelCitas extends JPanel {
 		}
 	}
 
-	/**
-	 * Obtiene la cita seleccionada en la tabla.
-	 */
 	private Cita obtenerCitaSeleccionada() {
 		int filaSeleccionada = tablaCitas.getSelectedRow();
 
@@ -204,6 +204,9 @@ public class PanelCitas extends JPanel {
 		int idTraje = Integer.parseInt(modeloCitas.getValueAt(filaSeleccionada, 8).toString());
 		String nombreTraje = modeloCitas.getValueAt(filaSeleccionada, 9).toString();
 
+		int idAprendiz1 = Integer.parseInt(modeloCitas.getValueAt(filaSeleccionada, 10).toString());
+		int idAprendiz2 = Integer.parseInt(modeloCitas.getValueAt(filaSeleccionada, 11).toString());
+
 		Cita cita = new Cita();
 		cita.setIdCita(idCita);
 		cita.setFechaCita(fechaCita);
@@ -219,19 +222,18 @@ public class PanelCitas extends JPanel {
 		cita.setIdTraje(idTraje);
 		cita.setNombreTraje(nombreTraje);
 
+		cita.setIdAprendiz1(idAprendiz1);
+		cita.setIdAprendiz2(idAprendiz2);
+
 		return cita;
 	}
 
-	/**
-	 * Abre el formulario para editar una cita seleccionada.
-	 */
 	private void abrirFormularioEditarCita() {
 		Cita citaSeleccionada = obtenerCitaSeleccionada();
 
 		if (citaSeleccionada != null) {
 
 			if (empleadoActual.esOficial() && citaSeleccionada.getIdResponsable() != empleadoActual.getIdEmpleado()) {
-
 				JOptionPane.showMessageDialog(this, "Solo puedes editar tus propias citas.");
 				return;
 			}
@@ -241,17 +243,11 @@ public class PanelCitas extends JPanel {
 		}
 	}
 
-	/**
-	 * Abre el formulario para crear una nueva cita.
-	 */
 	private void abrirFormularioNuevaCita() {
 		VentanaCitaFormulario ventanaCitaFormulario = new VentanaCitaFormulario(this);
 		ventanaCitaFormulario.setVisible(true);
 	}
 
-	/**
-	 * Elimina la cita seleccionada previa confirmación.
-	 */
 	private void eliminarCita() {
 		Cita citaSeleccionada = obtenerCitaSeleccionada();
 
@@ -272,9 +268,6 @@ public class PanelCitas extends JPanel {
 		}
 	}
 
-	/**
-	 * Refresca la tabla recargando las citas.
-	 */
 	public void refrescarTablaCitas() {
 		cargarCitas();
 	}

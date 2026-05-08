@@ -14,19 +14,19 @@ public class Cita {
 	private int idResponsable;
 	private int idTraje;
 
+	private int idAprendiz1;
+	private int idAprendiz2;
+
 	private String nombreTaller;
 	private String nombreResponsable;
 	private String nombreTraje;
 
-	/**
-	 * Constructor vacío.
-	 */
+	private String nombreAprendiz1;
+	private String nombreAprendiz2;
+
 	public Cita() {
 	}
 
-	/**
-	 * Constructor con todos los datos de la cita.
-	 */
 	public Cita(int idCita, String fechaCita, String horaCita, int duracionCita, int idTaller, int idResponsable,
 			int idTraje, String nombreTaller, String nombreResponsable, String nombreTraje) {
 		this.idCita = idCita;
@@ -97,6 +97,22 @@ public class Cita {
 		this.idTraje = idTraje;
 	}
 
+	public int getIdAprendiz1() {
+		return idAprendiz1;
+	}
+
+	public void setIdAprendiz1(int idAprendiz1) {
+		this.idAprendiz1 = idAprendiz1;
+	}
+
+	public int getIdAprendiz2() {
+		return idAprendiz2;
+	}
+
+	public void setIdAprendiz2(int idAprendiz2) {
+		this.idAprendiz2 = idAprendiz2;
+	}
+
 	public String getNombreTaller() {
 		return nombreTaller;
 	}
@@ -121,9 +137,22 @@ public class Cita {
 		this.nombreTraje = nombreTraje;
 	}
 
-	/**
-	 * Devuelve una representación simple de la cita.
-	 */
+	public String getNombreAprendiz1() {
+		return nombreAprendiz1;
+	}
+
+	public void setNombreAprendiz1(String nombreAprendiz1) {
+		this.nombreAprendiz1 = nombreAprendiz1;
+	}
+
+	public String getNombreAprendiz2() {
+		return nombreAprendiz2;
+	}
+
+	public void setNombreAprendiz2(String nombreAprendiz2) {
+		this.nombreAprendiz2 = nombreAprendiz2;
+	}
+
 	@Override
 	public String toString() {
 		return fechaCita + " - " + horaCita;
