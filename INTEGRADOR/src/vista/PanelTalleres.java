@@ -18,11 +18,12 @@ import controlador.TallerControlador;
 import modelo.Taller;
 
 /**
- * Panel encargado de gestionar la visualización y administración de talleres.
+ * Panel encargado de mostrar y gestionar los talleres.
+ * Permite crear, editar, eliminar y visualizar talleres en una tabla.
  */
 public class PanelTalleres extends JPanel {
 
-	private static final long serialVersionUID = 1L;
+
 
 	private JLabel lblTitulo;
 
@@ -39,7 +40,7 @@ public class PanelTalleres extends JPanel {
 	private TallerControlador tallerControlador;
 
 	/**
-	 * Construye el panel de gestión de talleres.
+	 * Construye el panel de talleres, configura la interfaz y carga los datos iniciales.
 	 */
 	public PanelTalleres() {
 		tallerControlador = new TallerControlador();
@@ -120,7 +121,7 @@ public class PanelTalleres extends JPanel {
 	}
 
 	/**
-	 * Carga los talleres en la tabla.
+	 * Carga los talleres desde la base de datos y los muestra en la tabla.
 	 */
 	private void cargarTalleres() {
 		modeloTalleres.setRowCount(0);

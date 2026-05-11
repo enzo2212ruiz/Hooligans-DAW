@@ -19,11 +19,12 @@ import modelo.Cita;
 import modelo.Empleado;
 
 /**
- * Panel encargado de gestionar la visualización y administración de citas.
+ * Panel que muestra y gestiona las citas del sistema.
+ * Permite crear, editar, eliminar y visualizar citas según los permisos del usuario.
  */
 public class PanelCitas extends JPanel {
 
-	private static final long serialVersionUID = 1L;
+
 
 	private JLabel lblTitulo;
 
@@ -136,6 +137,10 @@ public class PanelCitas extends JPanel {
 		tablaCitas.getColumnModel().getColumn(numeroColumna).setPreferredWidth(0);
 	}
 
+	/**
+	 * Carga las citas desde la base de datos y las muestra en la tabla.
+	 * Si el usuario es aprendiz, solo muestra las citas en las que participa.
+	 */
 	private void cargarCitas() {
 		modeloCitas.setRowCount(0);
 
@@ -169,6 +174,9 @@ public class PanelCitas extends JPanel {
 		}
 	}
 
+	/**
+	 * Oculta botones según el rol del empleado actual.
+	 */
 	private void aplicarPermisos() {
 
 		if (empleadoActual.esOficial()) {
@@ -182,6 +190,10 @@ public class PanelCitas extends JPanel {
 		}
 	}
 
+	/**
+	 * Obtiene los datos de la cita seleccionada en la tabla
+	 * y los convierte en un objeto Cita.
+	 */
 	private Cita obtenerCitaSeleccionada() {
 		int filaSeleccionada = tablaCitas.getSelectedRow();
 
@@ -268,6 +280,9 @@ public class PanelCitas extends JPanel {
 		}
 	}
 
+	/**
+	 * Recarga la tabla de citas después de crear, editar o eliminar una cita.
+	 */
 	public void refrescarTablaCitas() {
 		cargarCitas();
 	}

@@ -18,11 +18,11 @@ import controlador.TrajeControlador;
 import modelo.Traje;
 
 /**
- * Panel encargado de gestionar la visualización y administración de trajes.
+ * Panel encargado de mostrar y gestionar los trajes.
+ * Permite crear, editar, eliminar y visualizar trajes en una tabla.
  */
 public class PanelTrajes extends JPanel {
 
-	private static final long serialVersionUID = 1L;
 
 	private JLabel lblTitulo;
 
@@ -39,7 +39,7 @@ public class PanelTrajes extends JPanel {
 	private TrajeControlador trajeControlador;
 
 	/**
-	 * Construye el panel de gestión de trajes.
+	 * Construye el panel de trajes, configura la interfaz y carga los datos iniciales.
 	 */
 	public PanelTrajes() {
 		trajeControlador = new TrajeControlador();
@@ -126,7 +126,7 @@ public class PanelTrajes extends JPanel {
 	}
 
 	/**
-	 * Carga los trajes en la tabla.
+	 * Carga los trajes desde la base de datos y los muestra en la tabla.
 	 */
 	private void cargarTrajes() {
 		modeloTrajes.setRowCount(0);
@@ -142,7 +142,7 @@ public class PanelTrajes extends JPanel {
 	}
 
 	/**
-	 * Obtiene el traje seleccionado en la tabla.
+	 * Obtiene el traje seleccionado en la tabla y lo convierte en un objeto Traje.
 	 */
 	private Traje obtenerTrajeSeleccionado() {
 		int filaSeleccionada = tablaTrajes.getSelectedRow();

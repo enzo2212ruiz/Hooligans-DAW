@@ -17,11 +17,12 @@ import controlador.EmpleadoControlador;
 import modelo.Empleado;
 
 /**
- * Ventana para crear o editar un empleado.
+ * Ventana utilizada para crear o modificar empleados.
+ * Recoge los datos del formulario y los envía al controlador.
  */
 public class VentanaEmpleadoFormulario extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+
 
 	private JPanel panelFondo;
 	private JPanel panelFormulario;
@@ -45,7 +46,7 @@ public class VentanaEmpleadoFormulario extends JFrame {
 	private Empleado empleadoEditar;
 
 	/**
-	 * Constructor para crear un nuevo empleado.
+	 * Constructor usado para crear un empleado nuevo.
 	 */
 	public VentanaEmpleadoFormulario(PanelEmpleados panelEmpleados) {
 		this.panelEmpleados = panelEmpleados;
@@ -228,7 +229,8 @@ public class VentanaEmpleadoFormulario extends JFrame {
 	}
 
 	/**
-	 * Guarda o modifica el empleado según corresponda.
+	 * Recoge los datos del formulario y decide si debe crear un empleado nuevo
+	 * o modificar uno existente.
 	 */
 	private void guardarEmpleado() {
 		String nombreEmpleado = txtNombreEmpleado.getText();

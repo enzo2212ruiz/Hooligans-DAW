@@ -3,15 +3,17 @@ package main;
 import vista.VentanaLogin;
 
 /**
- * Clase principal que inicia la aplicación mostrando la ventana de login.
+ * Clase principal que arranca todo el programa
+ * 
  */
 public class Main {
 
 	/**
-	 * Punto de entrada del programa.
+	 * llamamos al metodo de la clase VentanaLogin
 	 */
 	public static void main(String[] args) {
 		VentanaLogin ventanaLogin = new VentanaLogin();
 		ventanaLogin.setVisible(true);
 	}
 }
+

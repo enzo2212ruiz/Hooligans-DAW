@@ -8,7 +8,8 @@ import modelo.Traje;
 import modelo.TrajeB;
 
 /**
- * Controlador que gestiona las operaciones relacionadas con los trajes.
+ * Controlador encargado de gestionar la lógica relacionada con los trajes.
+ * Recibe datos desde la vista, los valida y llama a TrajeB para acceder a la base de datos.
  */
 public class TrajeControlador {
 
@@ -16,7 +17,7 @@ public class TrajeControlador {
 	private ClienteB clienteB;
 
 	/**
-	 * Inicializa el acceso a los datos de trajes y clientes.
+	 * Crea el controlador e inicializa la clase que trabaja con la base de datos de trajes.
 	 */
 	public TrajeControlador() {
 		trajeB = new TrajeB();
@@ -24,9 +25,7 @@ public class TrajeControlador {
 	}
 
 	/**
-	 * Obtiene la lista de trajes.
-	 * 
-	 * @return lista de trajes
+	 * Obtiene todos los trajes llamando a TrajeB.
 	 */
 	public ArrayList<Traje> obtenerTrajes() {
 		return trajeB.obtenerTrajes();
@@ -42,9 +41,7 @@ public class TrajeControlador {
 	}
 
 	/**
-	 * Guarda un nuevo traje si los datos son válidos.
-	 * 
-	 * @return true si se guardó correctamente
+	 * Valida los datos recibidos desde el formulario y guarda un traje nuevo.
 	 */
 	public boolean guardarTraje(String nombreTraje, String estadoTraje, int idCliente) {
 
@@ -69,9 +66,7 @@ public class TrajeControlador {
 	}
 
 	/**
-	 * Modifica un traje existente si los datos son válidos.
-	 * 
-	 * @return true si se modificó correctamente
+	 * Valida los datos recibidos desde el formulario y modifica un traje existente.
 	 */
 	public boolean modificarTraje(int idTraje, String nombreTraje, String estadoTraje, int idCliente) {
 
@@ -101,9 +96,7 @@ public class TrajeControlador {
 	}
 
 	/**
-	 * Elimina un traje por su ID.
-	 * 
-	 * @return true si se eliminó correctamente
+	 * Elimina un traje de la base de datos usando su identificador.
 	 */
 	public boolean eliminarTraje(int idTraje) {
 

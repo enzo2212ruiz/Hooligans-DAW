@@ -16,9 +16,11 @@ import javax.swing.JPanel;
 import controlador.CitaControlador;
 import modelo.Empleado;
 
+/**
+ * Ventana que permite seleccionar de 0 a 2 aprendices para una cita.
+ * Devuelve la selección a la ventana del formulario de cita.
+ */
 public class VentanaAprendicesFormulario extends JFrame {
-
-	private static final long serialVersionUID = 1L;
 
 	private JPanel panelFondo;
 	private JPanel panelFormulario;
@@ -153,6 +155,10 @@ public class VentanaAprendicesFormulario extends JFrame {
 		panelFormulario.add(btnCancelar);
 	}
 
+	/**
+	 * Carga en los dos desplegables únicamente los empleados con rol de aprendiz.
+	 * También añade una opción nula para permitir no seleccionar aprendiz.
+	 */
 	private void cargarAprendices() {
 		comboAprendiz1.addItem(null);
 		comboAprendiz2.addItem(null);
@@ -164,7 +170,11 @@ public class VentanaAprendicesFormulario extends JFrame {
 			comboAprendiz2.addItem(aprendiz);
 		}
 	}
-
+	
+	/**
+	 * Busca en el combo el aprendiz con el ID recibido y lo selecciona.
+	 * Se usa al editar una cita para mostrar los aprendices ya asignados.
+	 */
 	private void cargarAprendicesSeleccionados() {
 		int idAprendiz1 = ventanaCitaFormulario.getIdAprendiz1();
 		int idAprendiz2 = ventanaCitaFormulario.getIdAprendiz2();
@@ -184,6 +194,10 @@ public class VentanaAprendicesFormulario extends JFrame {
 		}
 	}
 
+	/**
+	 * Recoge los aprendices seleccionados, comprueba que no sean el mismo
+	 * y los devuelve a la ventana de cita.
+	 */
 	private void aceptar() {
 		Empleado aprendiz1 = (Empleado) comboAprendiz1.getSelectedItem();
 		Empleado aprendiz2 = (Empleado) comboAprendiz2.getSelectedItem();

@@ -19,9 +19,12 @@ import modelo.Empleado;
 import modelo.Taller;
 import modelo.Traje;
 
+/**
+ * Ventana utilizada para crear o modificar una cita.
+ * Recoge los datos del formulario y los envía al controlador.
+ */
 public class VentanaCitaFormulario extends JFrame {
 
-	private static final long serialVersionUID = 1L;
 
 	private JPanel panelFondo;
 	private JPanel panelFormulario;
@@ -228,6 +231,10 @@ public class VentanaCitaFormulario extends JFrame {
 		panelFormulario.add(btnAprendices);
 	}
 
+	/**
+	 * Carga los talleres, responsables y trajes en los desplegables.
+	 * Los responsables se filtran para que solo sean maestros u oficiales.
+	 */
 	private void cargarCombos() {
 		ArrayList<Taller> listaTalleres = citaControlador.obtenerTalleres();
 		ArrayList<Empleado> listaEmpleados = citaControlador.obtenerResponsables();
@@ -275,6 +282,10 @@ public class VentanaCitaFormulario extends JFrame {
 		}
 	}
 
+	/**
+	 * Recoge los datos del formulario y decide si debe crear una cita nueva
+	 * o modificar una cita existente.
+	 */
 	private void guardarCita() {
 		String fechaCita = txtFechaCita.getText();
 		String horaCita = txtHoraCita.getText();
@@ -325,6 +336,9 @@ public class VentanaCitaFormulario extends JFrame {
 		}
 	}
 
+	/**
+	 * Abre la ventana donde se pueden seleccionar de 0 a 2 aprendices.
+	 */
 	private void abrirFormularioAprendices() {
 		VentanaAprendicesFormulario ventana = new VentanaAprendicesFormulario(this);
 		ventana.setVisible(true);
@@ -346,6 +360,10 @@ public class VentanaCitaFormulario extends JFrame {
 		JOptionPane.showMessageDialog(this, "Aprendices seleccionados correctamente.");
 	}
 
+	/**
+	 * Recibe los aprendices seleccionados desde la ventana de aprendices
+	 * y guarda sus IDs para usarlos al guardar la cita.
+	 */
 	public int getIdAprendiz1() {
 		return idAprendiz1;
 	}

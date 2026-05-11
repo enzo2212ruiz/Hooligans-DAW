@@ -1,7 +1,8 @@
 package modelo;
 
 /**
- * Modelo que representa un traje.
+ * Clase modelo que representa un traje del sistema.
+ * Guarda los datos principales de un traje.
  */
 public class Traje {
 
@@ -12,7 +13,8 @@ public class Traje {
 	private String nombreCliente;
 
 	/**
-	 * Constructor vacío.
+	 * Constructor vacío que permite crear un traje sin datos
+	 * para rellenarlo posteriormente con los métodos set.
 	 */
 	public Traje() {
 	}
@@ -36,6 +38,10 @@ public class Traje {
 		this.idTraje = idTraje;
 	}
 
+	/**
+	 * Devuelve el nombre del traje para mostrarlo correctamente
+	 * en componentes como listas o desplegables.
+	 */
 	public String getNombreTraje() {
 		return nombreTraje;
 	}

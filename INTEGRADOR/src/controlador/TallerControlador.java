@@ -6,32 +6,29 @@ import modelo.Taller;
 import modelo.TallerB;
 
 /**
- * Controlador que gestiona las operaciones relacionadas con los talleres.
+ * Controlador encargado de gestionar la lógica relacionada con los talleres.
+ * Recibe datos desde la vista, los valida y llama a TallerB para acceder a la base de datos.
  */
 public class TallerControlador {
 
 	private TallerB tallerB;
 
 	/**
-	 * Inicializa el acceso a los datos de talleres.
+	 * Crea el controlador e inicializa la clase que trabaja con la base de datos de talleres.
 	 */
 	public TallerControlador() {
 		tallerB = new TallerB();
 	}
 
 	/**
-	 * Obtiene la lista de talleres.
-	 * 
-	 * @return lista de talleres
+	 * Obtiene todos los talleres llamando a TallerB.
 	 */
 	public ArrayList<Taller> obtenerTalleres() {
 		return tallerB.obtenerTalleres();
 	}
 
 	/**
-	 * Guarda un nuevo taller si los datos son válidos.
-	 * 
-	 * @return true si se guardó correctamente
+	 * Valida los datos recibidos desde el formulario y guarda un taller nuevo.
 	 */
 	public boolean guardarTaller(String nombreTaller, String tipoTaller) {
 
@@ -79,8 +76,6 @@ public class TallerControlador {
 
 	/**
 	 * Elimina un taller por su ID.
-	 * 
-	 * @return true si se eliminó correctamente
 	 */
 	public boolean eliminarTaller(int idTaller) {
 

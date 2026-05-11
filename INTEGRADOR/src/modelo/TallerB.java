@@ -7,15 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Clase encargada de gestionar las operaciones de base de datos relacionadas
- * con los talleres.
+ * Clase encargada de realizar las operaciones de base de datos
+ * relacionadas con los talleres.
  */
 public class TallerB {
 
 	/**
-	 * Obtiene todos los talleres de la base de datos.
-	 * 
-	 * @return lista de talleres
+	 * Obtiene todos los talleres almacenados en la base de datos
+	 * y los devuelve en una lista de objetos Taller.
 	 */
 	public ArrayList<Taller> obtenerTalleres() {
 		ArrayList<Taller> listaTalleres = new ArrayList<Taller>();
@@ -80,8 +79,6 @@ public class TallerB {
 
 	/**
 	 * Modifica un taller existente en la base de datos.
-	 * 
-	 * @return true si se modificó correctamente
 	 */
 	public boolean modificarTaller(Taller taller) {
 		String sql = "UPDATE TALLER SET nombre = ?, tipo = ? WHERE ID_taller = ?";
@@ -110,8 +107,6 @@ public class TallerB {
 
 	/**
 	 * Elimina un taller por su ID.
-	 * 
-	 * @return true si se eliminó correctamente
 	 */
 	public boolean eliminarTaller(int idTaller) {
 		String sql = "DELETE FROM TALLER WHERE ID_taller = ?";

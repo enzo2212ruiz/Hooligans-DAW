@@ -1,3 +1,6 @@
+//Se encarga de pedir usuario y contraseña, 
+//validar que no estén vacíos y enviar esos datos al LoginControlador. Si el login es correcto, 
+//abre VentanaMenu y le pasa el empleado que ha iniciado sesión.
 package vista;
 
 import java.awt.Color;
@@ -21,7 +24,6 @@ import modelo.Empleado;
  */
 public class VentanaLogin extends JFrame {
 
-	private static final long serialVersionUID = 1L;
 
 	private JPanel panelFondo;
 	private JPanel panelLogin;
@@ -36,7 +38,7 @@ public class VentanaLogin extends JFrame {
 
 	private JButton btnEntrar;
 	private JButton btnLimpiar;
-
+	
 	private LoginControlador loginControlador;
 
 	/**
@@ -82,9 +84,9 @@ public class VentanaLogin extends JFrame {
 	private void configurarLabels() {
 		lblTitulo = new JLabel("Edna Moda");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setForeground(new Color(91, 62, 46));
-		lblTitulo.setFont(new Font("Serif", Font.BOLD, 42));
-		lblTitulo.setBounds(60, 45, 330, 55);
+		lblTitulo.setForeground(new Color(91, 62, 46));//cambia el color del texto
+		lblTitulo.setFont(new Font("Serif", Font.BOLD, 42));//cambia la letra
+		lblTitulo.setBounds(60, 45, 330, 55);//indica posición y tamaño
 
 		lblSubtitulo = new JLabel("Gestión del taller");
 		lblSubtitulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -138,14 +140,14 @@ public class VentanaLogin extends JFrame {
 		btnLimpiar.setFocusPainted(false);
 		btnLimpiar.setBorder(BorderFactory.createLineBorder(new Color(210, 190, 170)));
 
+		//Estos botones llaman a los metodos
 		btnEntrar.addActionListener(e -> iniciarSesion());
 		btnLimpiar.addActionListener(e -> limpiarCampos());
-
 		txtPassword.addActionListener(e -> iniciarSesion());
 	}
 
 	/**
-	 * Agrega los componentes al panel.
+	 * Método que mete cada componente dentro de su panel.
 	 */
 	private void agregarComponentes() {
 		getContentPane().add(panelFondo);
@@ -162,9 +164,11 @@ public class VentanaLogin extends JFrame {
 	}
 
 	/**
-	 * Intenta iniciar sesión con los datos introducidos.
-	 */
-	private void iniciarSesion() {
+	 * Recoge el usuario y la contraseña introducidos,
+	 * comprueba que no estén vacíos y llama al controlador
+	 * para validar el inicio de sesión.
+	 * Si el login es correcto, abre el menú principal.
+	 */ void iniciarSesion() {
 		String apodoEmpleado = txtApodo.getText().trim();
 		String passwordEmpleado = new String(txtPassword.getPassword()).trim();
 
@@ -178,7 +182,7 @@ public class VentanaLogin extends JFrame {
 		if (empleado != null) {
 			VentanaMenu ventanaMenu = new VentanaMenu(empleado);
 			ventanaMenu.setVisible(true);
-			dispose();
+			dispose();//cierra la ventana de login
 		} else {
 			JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.");
 			txtPassword.setText("");

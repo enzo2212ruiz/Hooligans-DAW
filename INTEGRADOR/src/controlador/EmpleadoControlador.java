@@ -6,7 +6,8 @@ import modelo.Empleado;
 import modelo.EmpleadoB;
 
 /**
- * Controlador que gestiona las operaciones relacionadas con los empleados.
+ * Controlador encargado de gestionar la lógica relacionada con los empleados.
+ * Recibe datos desde la vista, los valida y llama a EmpleadoB para acceder a la base de datos.
  */
 public class EmpleadoControlador {
 
@@ -21,8 +22,6 @@ public class EmpleadoControlador {
 
 	/**
 	 * Obtiene la lista de empleados.
-	 * 
-	 * @return lista de empleados
 	 */
 	public ArrayList<Empleado> obtenerEmpleados() {
 		return empleadoB.obtenerEmpleados();
@@ -30,8 +29,6 @@ public class EmpleadoControlador {
 
 	/**
 	 * Guarda un nuevo empleado si los datos son válidos.
-	 * 
-	 * @return true si se guardó correctamente
 	 */
 	public boolean guardarEmpleado(String nombreEmpleado, String apodoEmpleado, String passwordEmpleado,
 			String categoriaEmpleado) {
@@ -63,8 +60,6 @@ public class EmpleadoControlador {
 
 	/**
 	 * Modifica un empleado existente si los datos son válidos.
-	 * 
-	 * @return true si se modificó correctamente
 	 */
 	public boolean modificarEmpleado(int idEmpleado, String nombreEmpleado, String apodoEmpleado,
 			String passwordEmpleado, String categoriaEmpleado) {
@@ -101,8 +96,6 @@ public class EmpleadoControlador {
 
 	/**
 	 * Elimina un empleado por su ID.
-	 * 
-	 * @return true si se eliminó correctamente
 	 */
 	public boolean eliminarEmpleado(int idEmpleado) {
 

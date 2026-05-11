@@ -15,11 +15,12 @@ import controlador.ClienteControlador;
 import modelo.Cliente;
 
 /**
- * Ventana para crear o editar un cliente.
+ * Ventana utilizada para crear o modificar clientes.
+ * Recoge los datos del formulario y los envía al controlador.
  */
 public class VentanaClienteFormulario extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+
 
 	private JPanel panelFondo;
 	private JPanel panelFormulario;
@@ -39,7 +40,7 @@ public class VentanaClienteFormulario extends JFrame {
 	private Cliente clienteEditar;
 
 	/**
-	 * Constructor para crear un nuevo cliente.
+	 * Constructor usado para crear un cliente nuevo.
 	 */
 	public VentanaClienteFormulario(PanelClientes panelClientes) {
 		this.panelClientes = panelClientes;
@@ -57,7 +58,7 @@ public class VentanaClienteFormulario extends JFrame {
 	}
 
 	/**
-	 * Constructor para editar un cliente existente.
+	 * Constructor usado para editar un cliente existente.
 	 */
 	public VentanaClienteFormulario(PanelClientes panelClientes, Cliente clienteEditar) {
 		this.panelClientes = panelClientes;
@@ -182,7 +183,7 @@ public class VentanaClienteFormulario extends JFrame {
 	}
 
 	/**
-	 * Carga los datos del cliente en el formulario para edición.
+	 * Carga en el formulario los datos del cliente que se va a editar.
 	 */
 	private void cargarDatosCliente() {
 		if (clienteEditar != null) {

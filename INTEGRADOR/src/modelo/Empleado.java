@@ -1,10 +1,9 @@
-//Esta clase solo sirve para guardar los datos de un empleado.
-//El toString() devuelve el nombre porque más adelante nos vendrá 
-//bien para mostrar empleados en combos o listas.
+
 package modelo;
 
 /**
- * Modelo que representa a un empleado.
+ * Clase modelo que representa un empleado del sistema.
+ * Guarda sus datos principales y permite comprobar su rol.
  */
 public class Empleado {
 
@@ -15,7 +14,8 @@ public class Empleado {
 	private String categoriaEmpleado;
 
 	/**
-	 * Constructor vacío.
+	 * Constructor vacío que permite crear un empleado sin datos
+	 * para rellenarlo posteriormente con los métodos set.
 	 */
 	public Empleado() {
 	}
@@ -32,6 +32,7 @@ public class Empleado {
 		this.categoriaEmpleado = categoriaEmpleado;
 	}
 
+	//GETTERS Y SETTERS
 	public int getIdEmpleado() {
 		return idEmpleado;
 	}
@@ -73,22 +74,18 @@ public class Empleado {
 	}
 
 	/**
-	 * Indica si el empleado pertenece a la categoría MAESTRO.
+	 * Comprueba si el empleado tiene rol de maestro, oficial o aprendiz.
 	 */
 	public boolean esMaestro() {
 		return "MAESTRO".equalsIgnoreCase(categoriaEmpleado);
 	}
 
-	/**
-	 * Indica si el empleado pertenece a la categoría OFICIAL.
-	 */
+	
 	public boolean esOficial() {
 		return "OFICIAL".equalsIgnoreCase(categoriaEmpleado);
 	}
 
-	/**
-	 * Indica si el empleado pertenece a la categoría APRENDIZ.
-	 */
+	
 	public boolean esAprendiz() {
 		return "APRENDIZ".equalsIgnoreCase(categoriaEmpleado);
 	}

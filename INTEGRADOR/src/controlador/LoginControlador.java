@@ -5,22 +5,25 @@ import modelo.EmpleadoB;
 
 /**
  * Controlador encargado de gestionar el inicio de sesión.
+ * conectar la ventana de login con el modelo/base de datos.
+ * Es decir es un ùente entre VentanaLogin -> LoginControlador -> EmpleadoB
  */
 public class LoginControlador {
 
 	private EmpleadoB empleadoB;
 
 	/**
-	 * Inicializa el acceso a los datos de empleados.
+	 * CONSTRUCTOR
+	 * Cuando se crea un LoginControlador, también se crea un EmpleadoB.
 	 */
 	public LoginControlador() {
 		empleadoB = new EmpleadoB();
 	}
 
 	/**
-	 * Intenta iniciar sesión comprobando apodo y contraseña.
-	 * 
-	 * @return el empleado si los datos son correctos, o null si no lo son
+	 * Valida el inicio de sesión llamando a la clase EmpleadoB.
+	 * Si las credenciales son correctas, devuelve el empleado encontrado.
+	 * Si no son correctas, devuelve null.
 	 */
 	public Empleado iniciarSesion(String apodoEmpleado, String passwordEmpleado) {
 

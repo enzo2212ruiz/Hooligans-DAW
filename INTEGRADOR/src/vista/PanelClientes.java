@@ -18,11 +18,11 @@ import controlador.ClienteControlador;
 import modelo.Cliente;
 
 /**
- * Panel encargado de gestionar la visualización y administración de clientes.
+ * Panel encargado de mostrar y gestionar los clientes.
  */
 public class PanelClientes extends JPanel {
 
-	private static final long serialVersionUID = 1L;
+
 
 	private JLabel lblTitulo;
 
@@ -120,7 +120,7 @@ public class PanelClientes extends JPanel {
 	}
 
 	/**
-	 * Carga los clientes en la tabla.
+	 * Carga los clientes desde la base de datos y los muestra en la tabla.
 	 */
 	private void cargarClientes() {
 		modeloClientes.setRowCount(0);
@@ -135,7 +135,7 @@ public class PanelClientes extends JPanel {
 	}
 
 	/**
-	 * Obtiene el cliente seleccionado en la tabla.
+	 * Obtiene el cliente seleccionado en la tabla y lo convierte en un objeto Cliente.
 	 */
 	private Cliente obtenerClienteSeleccionado() {
 		int filaSeleccionada = tablaClientes.getSelectedRow();
@@ -200,9 +200,10 @@ public class PanelClientes extends JPanel {
 		}
 	}
 
+	
 	/**
-	 * Refresca la tabla recargando los clientes.
-	 */
+ * Recarga la tabla después de crear, editar o eliminar un cliente.
+ */
 	public void refrescarTablaClientes() {
 		cargarClientes();
 	}

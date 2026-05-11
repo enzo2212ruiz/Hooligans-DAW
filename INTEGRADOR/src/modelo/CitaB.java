@@ -8,10 +8,15 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 /**
- * Clase encargada de gestionar las operaciones de base de datos relacionadas con las citas.
+ * Clase encargada de realizar las operaciones de base de datos
+ * relacionadas con las citas.
  */
 public class CitaB {
 
+	/**
+	 * Obtiene todas las citas junto con los nombres del taller,
+	 * responsable, traje y aprendices asociados.
+	 */
 	public ArrayList<Cita> obtenerCitas() {
 		ArrayList<Cita> listaCitas = new ArrayList<Cita>();
 
@@ -72,6 +77,10 @@ public class CitaB {
 		return listaCitas;
 	}
 
+	/**
+	 * Inserta una nueva cita en la base de datos.
+	 * Los aprendices son opcionales, por eso pueden guardarse como NULL.
+	 */
 	public boolean insertarCita(Cita cita) {
 		String sql = "INSERT INTO CITA (dia, hora, duracion, ID_taller, ID_responsable, ID_traje, ID_aprendiz1, ID_aprendiz2) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -113,6 +122,9 @@ public class CitaB {
 		}
 	}
 
+	/**
+	 * Modifica una cita existente en la base de datos.
+	 */
 	public boolean modificarCita(Cita cita) {
 		String sql = "UPDATE CITA SET dia = ?, hora = ?, duracion = ?, ID_taller = ?, "
 				+ "ID_responsable = ?, ID_traje = ?, ID_aprendiz1 = ?, ID_aprendiz2 = ? "
@@ -157,6 +169,9 @@ public class CitaB {
 		}
 	}
 
+	/**
+	 * Elimina una cita de la base de datos según su ID.
+	 */
 	public boolean eliminarCita(int idCita) {
 		String sql = "DELETE FROM CITA WHERE ID_cita = ?";
 

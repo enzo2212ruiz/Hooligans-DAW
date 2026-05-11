@@ -1,3 +1,7 @@
+/**
+ * Clase encargada de crear la conexión con la base de datos MySQL.
+ * Todas las clases de base de datos usan este método para conectarse.
+ */
 package modelo;
 
 import java.sql.Connection;
@@ -14,9 +18,8 @@ public class ConexionBD {
 	private static final String PASSWORD_BD = "root";
 
 	/**
-	 * Establece y devuelve una conexión con la base de datos.
-	 * 
-	 * @return conexión activa o null si falla
+	 * Abre y devuelve una conexión con la base de datos.
+	 * Si ocurre un error, muestra el mensaje por consola.
 	 */
 	public static Connection conectar() {
 		Connection conexion = null;

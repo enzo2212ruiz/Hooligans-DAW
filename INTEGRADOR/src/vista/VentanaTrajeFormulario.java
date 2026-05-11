@@ -19,11 +19,12 @@ import modelo.Cliente;
 import modelo.Traje;
 
 /**
- * Ventana para crear o editar un traje.
+ * Ventana utilizada para crear o modificar trajes.
+ * Recoge los datos del formulario y los envía al controlador.
  */
 public class VentanaTrajeFormulario extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+
 
 	private JPanel panelFondo;
 	private JPanel panelFormulario;
@@ -45,7 +46,7 @@ public class VentanaTrajeFormulario extends JFrame {
 	private Traje trajeEditar;
 
 	/**
-	 * Constructor para crear un nuevo traje.
+	 * Constructor usado para crear un traje nuevo.
 	 */
 	public VentanaTrajeFormulario(PanelTrajes panelTrajes) {
 		this.panelTrajes = panelTrajes;
@@ -219,7 +220,7 @@ public class VentanaTrajeFormulario extends JFrame {
 	}
 
 	/**
-	 * Carga los datos del traje en el formulario para edición.
+	 * Carga en el formulario los datos del traje que se va a editar.
 	 */
 	private void cargarDatosTraje() {
 		if (trajeEditar != null) {
@@ -235,7 +236,8 @@ public class VentanaTrajeFormulario extends JFrame {
 	}
 
 	/**
-	 * Guarda o modifica el traje según corresponda.
+	 * Recoge los datos del formulario y decide si debe crear un traje nuevo
+	 * o modificar uno existente.
 	 */
 	private void guardarTraje() {
 		String nombreTraje = txtNombreTraje.getText();

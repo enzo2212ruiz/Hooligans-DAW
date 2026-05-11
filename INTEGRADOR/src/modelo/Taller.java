@@ -1,7 +1,8 @@
 package modelo;
 
 /**
- * Modelo que representa un taller.
+ * Clase modelo que representa un taller del sistema.
+ * Guarda los datos principales de un taller.
  */
 public class Taller {
 
@@ -10,7 +11,8 @@ public class Taller {
 	private String tipoTaller;
 
 	/**
-	 * Constructor vacío.
+	 * Constructor vacío que permite crear un taller sin datos
+	 * para rellenarlo posteriormente con los métodos set.
 	 */
 	public Taller() {
 	}
@@ -32,6 +34,10 @@ public class Taller {
 		this.idTaller = idTaller;
 	}
 
+	/**
+	 * Devuelve el nombre del taller para mostrarlo correctamente
+	 * en componentes como listas o desplegables.
+	 */
 	public String getNombreTaller() {
 		return nombreTaller;
 	}

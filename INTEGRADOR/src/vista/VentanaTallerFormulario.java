@@ -15,11 +15,12 @@ import controlador.TallerControlador;
 import modelo.Taller;
 
 /**
- * Ventana para crear o editar un taller.
+ * Ventana utilizada para crear o modificar talleres.
+ * Recoge los datos del formulario y los envía al controlador.
  */
 public class VentanaTallerFormulario extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+
 
 	private JPanel panelFondo;
 	private JPanel panelFormulario;
@@ -39,7 +40,7 @@ public class VentanaTallerFormulario extends JFrame {
 	private Taller tallerEditar;
 
 	/**
-	 * Constructor para crear un nuevo taller.
+	 * Constructor usado para crear un taller nuevo.
 	 */
 	public VentanaTallerFormulario(PanelTalleres panelTalleres) {
 		this.panelTalleres = panelTalleres;
@@ -192,7 +193,8 @@ public class VentanaTallerFormulario extends JFrame {
 	}
 
 	/**
-	 * Guarda o modifica el taller según corresponda.
+	 * Recoge los datos del formulario y decide si debe crear un taller nuevo
+	 * o modificar uno existente.
 	 */
 	private void guardarTaller() {
 		String nombreTaller = txtNombreTaller.getText();

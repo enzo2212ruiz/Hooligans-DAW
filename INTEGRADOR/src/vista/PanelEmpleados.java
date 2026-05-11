@@ -18,11 +18,12 @@ import controlador.EmpleadoControlador;
 import modelo.Empleado;
 
 /**
- * Panel encargado de gestionar la visualización y administración de empleados.
+ * Recoge los datos del formulario y decide si debe crear un taller nuevo
+ * o modificar uno existente.
  */
 public class PanelEmpleados extends JPanel {
 
-	private static final long serialVersionUID = 1L;
+
 
 	private JLabel lblTitulo;
 

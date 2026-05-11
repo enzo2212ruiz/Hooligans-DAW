@@ -11,6 +11,10 @@ import modelo.TallerB;
 import modelo.Traje;
 import modelo.TrajeB;
 
+/**
+ * Controlador encargado de gestionar la lógica relacionada con las citas.
+ * Conecta la vista con las clases de base de datos.
+ */
 public class CitaControlador {
 
 	private CitaB citaB;
@@ -37,6 +41,10 @@ public class CitaControlador {
 		return empleadoB.obtenerEmpleados();
 	}
 
+	/**
+	 * Devuelve solo los empleados que pueden ser responsables de una cita:
+	 * maestros y oficiales.
+	 */
 	public ArrayList<Empleado> obtenerResponsables() {
 		ArrayList<Empleado> responsables = new ArrayList<Empleado>();
 
@@ -49,6 +57,9 @@ public class CitaControlador {
 		return responsables;
 	}
 
+	/**
+	 * Devuelve solo los empleados con rol de aprendiz.
+	 */
 	public ArrayList<Empleado> obtenerAprendices() {
 		ArrayList<Empleado> aprendices = new ArrayList<Empleado>();
 
@@ -65,6 +76,9 @@ public class CitaControlador {
 		return trajeB.obtenerTrajes();
 	}
 
+	/**
+	 * Valida los datos recibidos desde el formulario y guarda una nueva cita.
+	 */
 	public boolean guardarCita(String fechaCita, String horaCita, String duracionCita, int idTaller, int idResponsable,
 			int idTraje, int idAprendiz1, int idAprendiz2) {
 
@@ -103,6 +117,9 @@ public class CitaControlador {
 		return citaB.insertarCita(cita);
 	}
 
+	/**
+	 * Valida los datos recibidos y modifica una cita existente.
+	 */
 	public boolean modificarCita(int idCita, String fechaCita, String horaCita, String duracionCita, int idTaller,
 			int idResponsable, int idTraje, int idAprendiz1, int idAprendiz2) {
 
@@ -144,6 +161,9 @@ public class CitaControlador {
 		return citaB.modificarCita(cita);
 	}
 
+	/**
+	 * Elimina una cita según su identificador.
+	 */
 	public boolean eliminarCita(int idCita) {
 		if (idCita <= 0)
 			return false;

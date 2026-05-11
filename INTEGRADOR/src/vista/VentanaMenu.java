@@ -13,12 +13,11 @@ import javax.swing.SwingConstants;
 import modelo.Empleado;
 
 /**
- * Ventana principal del sistema tras iniciar sesión. Muestra el menú lateral y
- * carga los distintos paneles de gestión.
+ * Ventana principal de la aplicación.
+ * Desde aquí se accede a los distintos paneles del sistema.
  */
 public class VentanaMenu extends JFrame {
 
-	private static final long serialVersionUID = 1L;
 
 	private JPanel panelPrincipal;
 	private JPanel panelMenu;
@@ -280,7 +279,7 @@ public class VentanaMenu extends JFrame {
 	}
 
 	/**
-	 * Muestra un panel de gestión dentro del área de contenido.
+	 * Cambia el panel central de la ventana por el panel recibido.
 	 */
 	private void mostrarPanel(JPanel panel) {
 		panelContenido.removeAll();

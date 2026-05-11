@@ -1,7 +1,8 @@
 package modelo;
 
 /**
- * Modelo que representa a un cliente.
+ * Clase modelo que representa un cliente del sistema.
+ * Guarda los datos principales de un cliente.
  */
 public class Cliente {
 
@@ -10,7 +11,8 @@ public class Cliente {
 	private String superpoderCliente;
 
 	/**
-	 * Constructor vacío.
+	 * Constructor vacío que permite crear un cliente sin datos
+	 * para rellenarlo posteriormente con los métodos set.
 	 */
 	public Cliente() {
 	}
@@ -32,6 +34,10 @@ public class Cliente {
 		this.idCliente = idCliente;
 	}
 
+	/**
+	 * Devuelve el nombre del cliente para mostrarlo correctamente
+	 * en componentes como listas o desplegables.
+	 */
 	public String getNombreCliente() {
 		return nombreCliente;
 	}

@@ -7,15 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Clase encargada de gestionar las operaciones de base de datos relacionadas
- * con los trajes.
+ * Clase encargada de realizar las operaciones de base de datos
+ * relacionadas con los trajes.
  */
 public class TrajeB {
 
 	/**
-	 * Obtiene todos los trajes de la base de datos.
-	 * 
-	 * @return lista de trajes
+	 * Obtiene todos los trajes almacenados en la base de datos
+	 * y los devuelve en una lista de objetos Traje.
 	 */
 	public ArrayList<Traje> obtenerTrajes() {
 		ArrayList<Traje> listaTrajes = new ArrayList<Traje>();
@@ -55,8 +54,6 @@ public class TrajeB {
 
 	/**
 	 * Inserta un nuevo traje en la base de datos.
-	 * 
-	 * @return true si se insertó correctamente
 	 */
 	public boolean insertarTraje(Traje traje) {
 		String sql = "INSERT INTO TRAJE (nombre, estado, ID_cliente) VALUES (?, ?, ?)";
@@ -85,8 +82,6 @@ public class TrajeB {
 
 	/**
 	 * Modifica un traje existente en la base de datos.
-	 * 
-	 * @return true si se modificó correctamente
 	 */
 	public boolean modificarTraje(Traje traje) {
 		String sql = "UPDATE TRAJE SET nombre = ?, estado = ?, ID_cliente = ? WHERE ID_traje = ?";
@@ -116,8 +111,6 @@ public class TrajeB {
 
 	/**
 	 * Elimina un traje por su ID.
-	 * 
-	 * @return true si se eliminó correctamente
 	 */
 	public boolean eliminarTraje(int idTraje) {
 		String sql = "DELETE FROM TRAJE WHERE ID_traje = ?";

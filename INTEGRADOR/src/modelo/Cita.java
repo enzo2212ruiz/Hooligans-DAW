@@ -1,7 +1,9 @@
 package modelo;
 
 /**
- * Modelo que representa una cita con toda su información.
+ * Clase modelo que representa una cita del sistema.
+ * Guarda sus datos principales y las relaciones con taller,
+ * responsable, traje y aprendices.
  */
 public class Cita {
 
@@ -97,6 +99,8 @@ public class Cita {
 		this.idTraje = idTraje;
 	}
 
+	// IDs de los aprendices asignados a la cita.
+	// Si valen 0, significa que no hay aprendiz seleccionado.
 	public int getIdAprendiz1() {
 		return idAprendiz1;
 	}
@@ -113,6 +117,10 @@ public class Cita {
 		this.idAprendiz2 = idAprendiz2;
 	}
 
+	/**
+	 * Devuelve una representación sencilla de la cita,
+	 * mostrando su fecha y hora.
+	 */
 	public String getNombreTaller() {
 		return nombreTaller;
 	}
